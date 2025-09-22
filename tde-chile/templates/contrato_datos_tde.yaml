@@ -1,0 +1,22 @@
+kind: data_contract
+version: "1.0.0"
+product_name: "<dataset|expediente>"
+owner_org: "<servicio u OAE>"
+tde:
+  soporte_electronico: true
+  interoperable_via: "PISEE"
+  expediente_electronico: true
+  notificacion_electronica: true
+datos_personales:
+  base_legal: "<ley/articulo>"
+  privacidad_por_diseno: true
+  eipd_id: "<EIPD-XXX|no_aplica>"
+  medidas_seguridad: ["cifrado","rbac_abac","verificacion_regular"]
+  retencion_meses: "<N>"
+  dpo_contacto: "<correo institucional>"
+brechas:
+  procedimiento: "GO-007_Notificacion_Brechas_Datos"
+  ventana_notif_apdp: "sin_dilaciones_indebidas"
+evidencia:
+  registro_auditoria: "inmutable"
+  hash_expedientes: true

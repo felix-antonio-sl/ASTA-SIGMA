@@ -1,0 +1,4 @@
+unit_id: UN-EJEMPLO
+nombre: "División/Departamento de Ejemplo"
+capabilities: [gestion_actos_adm, notificaciones, compliance]
+jefatura: "Jefe/a Unidad <jefatura@org.cl>"

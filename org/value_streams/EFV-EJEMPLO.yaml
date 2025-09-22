@@ -1,0 +1,4 @@
+efv_id: EFV-EJEMPLO
+objetivo: "Entregar servicios digitales simples e inclusivos"
+kpi: [tiempo_ciclo, nps, tasa_exito]
+unidades: [UN-EJEMPLO]

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "process_name",
+    "tde",
+    "sla",
+    "auditoria"
+  ],
+  "properties": {
+    "kind": {
+      "const": "process_contract"
+    },
+    "version": {
+      "type": "string"
+    },
+    "process_name": {
+      "type": "string"
+    },
+    "tde": {
+      "type": "object",
+      "required": [
+        "ley_base",
+        "reglamento",
+        "normas_tecnicas",
+        "expediente_electronico",
+        "interoperabilidad",
+        "notificacion"
+      ],
+      "properties": {
+        "ley_base": {
+          "type": "string"
+        },
+        "reglamento": {
+          "type": "string"
+        },
+        "normas_tecnicas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expediente_electronico": {
+          "type": "boolean"
+        },
+        "interoperabilidad": {
+          "type": "object"
+        },
+        "notificacion": {
+          "type": "object"
+        }
+      }
+    },
+    "sla": {
+      "type": "object"
+    },
+    "hitl": {
+      "type": "object"
+    },
+    "auditoria": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+kind: agent_contract
+version: "1.0.0"
+agent_id: "<AG-XXX>"
+hcai_purpose: "<ASSIST|AUGMENT|...>"
+interaction_mode: "HUMAN_IN_THE_LOOP"
+legal:
+  proposito_legal: "<mandato legal>"
+  tratamiento_datos_personales: "<si/no>"
+  base_legal_datos: "<ley/articulo>"
+tde:
+  autenticacion: "ClaveUnica|OIDC institucional"
+  interoperabilidad: "PISEE"
+  notificacion: "Notificador/DDU"
+dp_21719:
+  privacidad_por_diseno: true
+  medidas_seguridad: ["cifrado","dlp","verificacion_regular"]
+  eipd_id: "<EIPD-XXX|no_aplica>"
+  brechas_go: "GO-007_Notificacion_Brechas_Datos"
+ia_riesgo:
+  nivel: "<INACEPTABLE|ALTO|LIMITADO|MINIMO>"
+  transparencia_usuario: "<si/no>"
+  monitoreo_pos_despliegue: true
+  kill_switch: true
+telemetry:
+  opentelemetry: true
+  min_log_fields: [trace_id, st_id, model_version, prompts_hash, incident_flag]

@@ -1,0 +1,12 @@
+org_id: ORG-SIGLA
+nombre: "Nombre Oficial de la Organización"
+mandato_legal: ["Ley 18.575", "Ley 21.658", "Ley 21.180"]
+contactos_clave:
+  ctd:  "Nombre CTD <ctd@org.cl>"
+  dpo:  "Nombre DPO <dpo@org.cl>"
+  ciso: "Nombre CISO <ciso@org.cl>"
+principios:
+  egd2030: [digital_por_diseno, centrado_en_personas, gobierno_integrado]
+  mgde: [datos_activo_estrategico, catalogo_mandatorio, responsable_por_dato]
+observaciones: |
+  Ajusta esta ficha como “fuente única” de identidad institucional del marco.

@@ -1,0 +1,22 @@
+kind: data_contract
+version: "1.0.0"
+product_name: "Expediente Subsidio X"
+owner_org: "ORG-SIGLA"
+tde:
+  soporte_electronico: true
+  interoperable_via: "PISEE"
+  expediente_electronico: true
+  notificacion_electronica: true
+datos_personales:
+  base_legal: "Ley 19.880; Ley sectorial X"
+  privacidad_por_diseno: true         # Ley 21.719 art. 14 quáter
+  eipd_id: "EIPD-2025-001"            # Ley 21.719 art. 15 ter
+  medidas_seguridad: ["cifrado","rbac_abac","verificacion_regular"]  # art. 14 quinquies
+  retencion_meses: 60
+  dpo_contacto: "dpo@org.cl"
+brechas:
+  procedimiento: "GO-007_Notificacion_Brechas_Datos"  # art. 14 sexies
+  ventana_notif_apdp: "sin_dilaciones_indebidas"
+evidencia:
+  registro_auditoria: "inmutable"
+  hash_expedientes: true

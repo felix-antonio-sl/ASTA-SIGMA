@@ -1,0 +1,18 @@
+name: validate-asta-tde-cl
+on:
+  pull_request:
+  push:
+    branches: [ main, master, feature/** ]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: pip install pyyaml jsonschema
+      - name: Validate contracts
+        run: bash tde-chile/ci/validate_contracts.sh

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "product_name",
+    "tde",
+    "datos_personales",
+    "brechas"
+  ],
+  "properties": {
+    "kind": {
+      "const": "data_contract"
+    },
+    "version": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "owner_org": {
+      "type": "string"
+    },
+    "tde": {
+      "type": "object",
+      "required": [
+        "soporte_electronico",
+        "interoperable_via",
+        "expediente_electronico",
+        "notificacion_electronica"
+      ],
+      "properties": {
+        "soporte_electronico": {
+          "type": "boolean"
+        },
+        "interoperable_via": {
+          "type": "string"
+        },
+        "expediente_electronico": {
+          "type": "boolean"
+        },
+        "notificacion_electronica": {
+          "type": "boolean"
+        }
+      }
+    },
+    "datos_personales": {
+      "type": "object",
+      "required": [
+        "base_legal",
+        "privacidad_por_diseno",
+        "eipd_id",
+        "medidas_seguridad"
+      ],
+      "properties": {
+        "base_legal": {
+          "type": "string"
+        },
+        "privacidad_por_diseno": {
+          "type": "boolean"
+        },
+        "eipd_id": {
+          "type": "string"
+        },
+        "medidas_seguridad": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retencion_meses": {
+          "type": "integer"
+        },
+        "dpo_contacto": {
+          "type": "string"
+        }
+      }
+    },
+    "brechas": {
+      "type": "object",
+      "required": [
+        "procedimiento",
+        "ventana_notif_apdp"
+      ],
+      "properties": {
+        "procedimiento": {
+          "type": "string"
+        },
+        "ventana_notif_apdp": {
+          "type": "string"
+        }
+      }
+    },
+    "evidencia": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+kind: supply_contract
+version: "1.0.0"
+nombre_servicio: "<API/Plataforma>"
+alcance: "Identidad|Interoperabilidad|Documental|Notificador|Firma"
+slas:
+  disponibilidad: "99.5%"
+  latencia_p95_ms: 800
+  rto_horas: 4
+  rpo_minutos: 30
+continuidad:
+  dr_bc_plan: true
+  pruebas_contingencia: "semestral"
+seguridad:
+  siem: true
+  cifrado_transito: "TLS1.2+"
+  cifrado_reposo: "AES-256"
+auditoria:
+  derecho_auditoria: true
+  informes_periodicos: "mensual"
+limitaciones:
+  rate_limit_rps: 50
+  cuotas_mensuales: 1000000
