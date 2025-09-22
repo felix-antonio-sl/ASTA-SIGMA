@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["contract_id", "schema_version", "system_id", "description", "owner", "quality_expectations"],
+  "properties": {
+    "contract_id": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "system_id": { "type": "string" },
+    "description": { "type": "string" },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "team": { "type": "string" },
+        "contact_email": { "type": "string", "format": "email" }
+      },
+      "required": ["team", "contact_email"],
+      "additionalProperties": false
+    },
+    "legal": { "type": "object" },
+    "quality_expectations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "target"],
+        "properties": {
+          "name": { "type": "string" },
+          "target": { "type": ["number", "string"] },
+          "measurement": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    },
+    "interfaces": { "type": "object" },
+    "controls": { "type": "object" },
+    "x_overlay": { "type": "object" }
+  },
+  "additionalProperties": true
+}

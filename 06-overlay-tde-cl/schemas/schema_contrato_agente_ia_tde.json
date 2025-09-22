@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "agent_id",
+    "interaction_mode",
+    "legal",
+    "ia_risk",
+    "telemetry",
+    "x_overlay"
+  ],
+  "properties": {
+    "kind": { "const": "agent_contract" },
+    "version": { "type": "string" },
+    "agent_id": { "type": "string" },
+    "hcai_purpose": { "type": "string" },
+    "interaction_mode": { "type": "string" },
+    "legal": {
+      "type": "object",
+      "required": ["lawful_purpose", "personal_data_processing", "lawful_basis"],
+      "properties": {
+        "lawful_purpose": { "type": "string" },
+        "personal_data_processing": { "type": "boolean" },
+        "lawful_basis": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "ia_risk": {
+      "type": "object",
+      "required": ["level", "user_transparency", "post_deployment_monitoring", "kill_switch"],
+      "properties": {
+        "level": { "type": "string" },
+        "user_transparency": { "type": "boolean" },
+        "post_deployment_monitoring": { "type": "boolean" },
+        "kill_switch": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "telemetry": {
+      "type": "object",
+      "required": ["opentelemetry", "min_log_fields"],
+      "properties": {
+        "opentelemetry": { "type": "boolean" },
+        "min_log_fields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "x_overlay": {
+      "type": "object",
+      "required": ["tde_cl"],
+      "properties": {
+        "tde_cl": {
+          "type": "object",
+          "required": [
+            "authentication_method",
+            "interoperability_network",
+            "notification_channel",
+            "privacy_by_design",
+            "security_measures",
+            "dpia_id",
+            "breach_playbook"
+          ],
+          "properties": {
+            "authentication_method": { "type": "string" },
+            "interoperability_network": { "type": "string" },
+            "notification_channel": { "type": "string" },
+            "privacy_by_design": { "type": "boolean" },
+            "security_measures": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1
+            },
+            "dpia_id": { "type": "string" },
+            "breach_playbook": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

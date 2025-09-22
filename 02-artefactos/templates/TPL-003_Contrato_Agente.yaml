@@ -1,0 +1,49 @@
+id: TPL-003
+version: 1.0.0
+status: draft
+date: 2024-05-01
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - MANUAL_ASTA-SIGMA
+  - GO-002
+  - GO-003
+kind: agent_contract_template
+template:
+  contract_id: "AG-XXX-001"
+  schema_version: "1.0.0"
+  system_id: "ST-XXX"
+  hcai_purpose: "ASSIST"              # Trad: Propósito HCAI
+  cognition_cycle: "SENSE_DECIDE_ACT"
+  interaction_mode: "HUMAN_IN_THE_LOOP"
+  delegated_role: >-
+    Describe the precise task delegated to the agent.  # Trad: Rol delegado en verbo + resultado
+  hitl_checkpoints:
+    - condition: "if confidence < 0.7"
+      action: "escalate_to: ANALYST"
+  safeguards:
+    transparency_notice: true
+    kill_switch: true
+    monitoring:
+      cadence: "daily"
+      owner: "SRE Team"
+  legal:
+    lawful_purpose: "Support administrative resolution"  # Trad: Propósito legal
+    lawful_basis: "Ley 19.880"
+  telemetry:
+    opentelemetry_enabled: true
+    required_log_fields: ["trace_id", "st_id", "model_version", "prompt_hash", "incident_flag"]
+  evaluation:
+    metrics:
+      - name: "factual_accuracy"
+        target: 0.95
+      - name: "latency_p95"
+        target_ms: 1500
+    guardrails:
+      - reference: "GO-002"
+        description: "Apply fidelity and citation checks"
+  x_overlay:
+    tde_cl:
+      authentication_method: "ClaveUnica"
+      interoperability_channel: "PISEE"
+      notification_channel: "DDU"
+      breach_playbook: "GO-007"

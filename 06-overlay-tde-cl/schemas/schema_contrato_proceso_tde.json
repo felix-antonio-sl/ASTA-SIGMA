@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "contract_id",
+    "process_name",
+    "objective",
+    "steps",
+    "service_levels",
+    "hitl",
+    "audit",
+    "x_overlay"
+  ],
+  "properties": {
+    "kind": { "const": "process_contract" },
+    "version": { "type": "string" },
+    "contract_id": { "type": "string" },
+    "process_name": { "type": "string" },
+    "objective": { "type": "string" },
+    "actors": {
+      "type": "object",
+      "properties": {
+        "owner_unit": { "type": "string" },
+        "supporting_roles": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "steps": {
+      "type": "array",
+      "items": { "type": "object" },
+      "minItems": 1
+    },
+    "service_levels": {
+      "type": "object",
+      "properties": {
+        "availability_pct": { "type": ["number", "integer"] },
+        "latency_p95": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "hitl": {
+      "type": "object",
+      "properties": {
+        "queues": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "log_store": { "type": "string" },
+        "retention": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "x_overlay": {
+      "type": "object",
+      "required": ["tde_cl"],
+      "properties": {
+        "tde_cl": {
+          "type": "object",
+          "required": [
+            "legal_basis",
+            "regulation",
+            "technical_norms",
+            "electronic_dossier",
+            "interoperability_network",
+            "repetitive_request_block",
+            "sensitive_data_authorization_logged",
+            "notification_channel",
+            "notification_audit_trail"
+          ],
+          "properties": {
+            "legal_basis": { "type": "string" },
+            "regulation": { "type": "string" },
+            "technical_norms": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "electronic_dossier": { "type": "boolean" },
+            "interoperability_network": { "type": "string" },
+            "repetitive_request_block": { "type": "boolean" },
+            "sensitive_data_authorization_logged": { "type": "boolean" },
+            "notification_channel": { "type": "string" },
+            "notification_audit_trail": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,40 @@
+id: TPL-005
+version: 1.0.0
+status: draft
+date: 2024-05-01
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - MANUAL_ASTA-SIGMA
+  - GOV-MATRIX-001
+kind: supply_contract_template
+template:
+  contract_id: "SUP-XXX-001"
+  provider_name: "Proveedor XYZ"
+  service_scope: ["identity", "interoperability"]
+  contact:
+    owner: "Proveedor"
+    email: "account@provider.cl"
+  slas:
+    availability: 0.995
+    latency_p95_ms: 800
+    rto_hours: 4
+    rpo_minutes: 30
+  continuity:
+    dr_plan: true
+    test_cadence: "semiannual"
+  security_requirements:
+    in_transit_encryption: "TLS1.2+"
+    at_rest_encryption: "AES-256"
+    siem_integration: true
+  audit_rights:
+    allowed: true
+    report_frequency: "monthly"
+  limits:
+    rate_limit_rps: 50
+    monthly_quota: 1000000
+  penalties:
+    - condition: "availability < 0.99"
+      credit: "10% invoice"
+  x_overlay:
+    tde_cl:
+      compliance_references: ["Ley 21.180", "Normas Técnicas Digitales"]

@@ -1,33 +1,42 @@
-# ASTA-SIGMA
+---
+id: ONBOARD-000
+version: 1.0.0
+status: active
+date: 2024-05-01
+owner: ASTA-SIGMA Core Team
+related:
+  - MANUAL_ASTA-SIGMA
+---
+# Manual Día 0 — Puesta en marcha institucional (Guía Express)
 
-Repositorio oficial para el sistema ASTA-SIGMA del plan de Transformación Digital y AI del Gobierno Regional de Ñuble (TDE GORE Ñuble).
+Este README es el punto de entrada oficial para instalar el marco ASTA-SIGMA en una organización. Para contexto ampliado y la narrativa completa del sistema consulta [`01-manual/MANUAL_ASTA-SIGMA.md`](01-manual/MANUAL_ASTA-SIGMA.md) y el índice maestro en [`00-overview/INDEX.md`](00-overview/INDEX.md).
 
-## Estructura del repositorio
+## 1) Instalar institucionalidad
 
-```
-ASTA-SIGMA/
-├── arquitectura/       # Documentos y diagramas de arquitectura
-├── diseno_experiencia/ # Diseños de experiencia de usuario
-├── guias_marco/        # Guías marco del sistema
-├── guias_operativas/   # Guías operativas y procedimientos
-├── policies/           # Políticas y gobernanza
-├── portfolio/          # Portafolio de componentes
-└── presentacion/       # Materiales de presentación
-```
+- Publica [`07-org/governance/RACI.md`](07-org/governance/RACI.md) y [`07-org/governance/comite_tic_ctd.md`](07-org/governance/comite_tic_ctd.md).
+- Designa CTD (titular/subrogante), DPO y CISO.
 
-## Cómo contribuir
+## 2) Declarar organización y mapa inicial
 
-1. Clona el repositorio
-2. Crea una rama para tu contribución (`git checkout -b mi-contribucion`)
-3. Haz tus cambios y commitea (`git commit -am 'Agrega nueva funcionalidad'`)
-4. Haz push a tu rama (`git push origin mi-contribucion`)
-5. Abre un Pull Request en GitHub
+- Completa [`07-org/organization.yaml`](07-org/organization.yaml) (misión, base legal, contactos).
+- Registra [`07-org/units/UN-EJEMPLO.yaml`](07-org/units/UN-EJEMPLO.yaml) y [`07-org/value_streams/EFV-EJEMPLO.yaml`](07-org/value_streams/EFV-EJEMPLO.yaml).
+- Crea mapeos [`07-org/mappings/units_to_efv.yaml`](07-org/mappings/units_to_efv.yaml) y [`07-org/mappings/efv_to_st.yaml`](07-org/mappings/efv_to_st.yaml).
 
-## Requisitos
+## 3) Identificar y priorizar procedimientos (CPAT)
 
-- Git 2.30+ 
-- Cuenta GitHub autorizada
+- Usa la guía de CPAT y crea las primeras fichas [`08-inventory/st/ST-*.md`](08-inventory/st/).
+- Para cada ST, declara **contratos** (datos, proceso, agente IA, servicio) dentro de [`08-inventory`](08-inventory/).
 
-## Licencia
+## 4) Cumplimiento por diseño (TDE + DP + IA)
 
-Este proyecto está bajo la licencia [MIT](LICENSE).
+- Activa políticas [`06-overlay-tde-cl/policies/*.yaml`](06-overlay-tde-cl/policies/).
+- Usa las guías [`06-overlay-tde-cl/guias_operativas/GO-*.md`](06-overlay-tde-cl/guias_operativas/) para expediente, interoperabilidad (PISEE), notificaciones, incidentes IA y brechas.
+
+## 5) Calidad, observabilidad y evidencia
+
+- Define SLO/SLI por ST, activa OTel según [`04-adrs/core/ADR-core-103_Estandar_Telemetria_OTel_IA_RAG.md`](04-adrs/core/ADR-core-103_Estandar_Telemetria_OTel_IA_RAG.md) y registra evidencias Δ.
+
+## 6) Pipeline (CI) y quality gates
+
+- Ejecuta `bash 06-overlay-tde-cl/ci/validate_contracts.sh` localmente.
+- Activa `.github/workflows/validate.yml` para bloquear PRs sin base legal/EIPD/riesgo IA.

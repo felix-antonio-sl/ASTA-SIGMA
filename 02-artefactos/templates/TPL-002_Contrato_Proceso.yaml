@@ -1,0 +1,56 @@
+id: TPL-002
+version: 1.0.0
+status: draft
+date: 2024-05-01
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - MANUAL_ASTA-SIGMA
+  - GM-003
+  - GO-003
+kind: process_contract_template
+template:
+  contract_id: "PROC-XXX-001"
+  schema_version: "1.0.0"
+  system_id: "ST-XXX"
+  process_name: "Nombre del Proceso"
+  objective: >-
+    Describe the outcome the process guarantees.  # Trad: Resultado comprometido
+  scope:
+    start_event: "Solicitud recibida"
+    end_event: "Resolución notificada"
+  actors:
+    primary_owner: "Unidad ejecutora"
+    supporting_roles:
+      - role: "Analista jurídico"
+        responsibilities: "Review legal compliance"
+  steps:
+    - id: "STEP-01"
+      name: "Validar antecedentes"
+      description: >-
+        Declarative description of the step.  # Trad: Qué se valida y por qué
+      inputs: ["Documento Identidad", "Formulario"]
+      outputs: ["Expediente validado"]
+      controls:
+        - type: "human_check"
+          description: "Double check by supervisor"
+    - id: "STEP-02"
+      name: "Emitir resolución"
+      description: "Generate final resolution letter"
+      inputs: ["Expediente validado"]
+      outputs: ["Resolución"]
+      controls:
+        - type: "system"
+          description: "Signed via qualified certificate"
+  service_levels:
+    throughput: { target_days: 5 }
+    backlog_limit: 100
+  compliance:
+    regulations: ["Ley 19.880"]
+    evidence_required:
+      - "Checklist firmado"
+      - "Log de sistema"
+  x_overlay:
+    tde_cl:
+      interoperability_protocol: "PISEE"
+      notification_standard: "DDU"
+      audit_reference: "GO-007"

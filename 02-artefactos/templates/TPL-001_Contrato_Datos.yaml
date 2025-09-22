@@ -1,0 +1,45 @@
+id: TPL-001
+version: 1.0.0
+status: draft
+date: 2024-05-01
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - MANUAL_ASTA-SIGMA
+  - GM-003
+  - GO-003
+kind: data_contract_template
+template:
+  contract_id: "DATA-XXX-001"  # Trad: Identificador del contrato de datos
+  schema_version: "1.0.0"
+  system_id: "ST-XXX"          # Trad: Sistema de Trabajo que publica el dato
+  description: >-
+    Provide a concise, action-oriented description of the dataset.  # Trad: Descripción en verbo + resultado
+  owner:
+    team: "Equipo de Flujo de Valor"
+    contact_email: "owner@example.org"
+  legal:
+    lawful_basis: "Law 19.880"  # Trad: Base legal del tratamiento
+    data_subject_rights: "aligned"  # Trad: Cómo se garantizan los derechos de las personas
+  quality_expectations:
+    - name: "completeness"
+      target: 0.99
+      measurement: "monthly"
+    - name: "timeliness"
+      target: "<24h"
+      measurement: "ingest"
+  interfaces:
+    delivery_mode: "s3"  # Trad: Canal de entrega (API, stream, batch)
+    format: "parquet"
+    schema_ref: "02-artefactos/schemas/data_contract_schema.json"
+  controls:
+    retention_months: 60
+    access_model: "role-based"
+    logging_level: "full"
+  x_overlay:
+    tde_cl:
+      electronic_dossier: true      # Trad: Expediente electrónico Ley 21.180
+      interoperability_network: "PISEE"  # Trad: Sistema de interoperabilidad utilizado
+      notification_channel: "DDU"
+      privacy_by_design: true
+      security_measures: ["encryption", "dlp", "regular_review"]
+      dpia_id: "EIPD-XXXX"

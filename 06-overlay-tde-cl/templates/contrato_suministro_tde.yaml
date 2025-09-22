@@ -1,0 +1,26 @@
+kind: supply_contract
+version: "1.0.0"
+contract_id: "SUP-XXX"
+service_name: "<API/Plataforma>"
+scope: "Identidad|Interoperabilidad|Documental|Notificador|Firma"
+slas:
+  availability: 0.995
+  latency_p95_ms: 800
+  rto_hours: 4
+  rpo_minutes: 30
+continuity:
+  dr_bc_plan: true
+  contingency_tests: "semestral"
+security:
+  siem_enabled: true
+  in_transit_encryption: "TLS1.2+"
+  at_rest_encryption: "AES-256"
+audit:
+  audit_right: true
+  reporting_cadence: "mensual"
+limits:
+  rate_limit_rps: 50
+  monthly_quota: 1000000
+x_overlay:
+  tde_cl:
+    compliance_references: ["Ley 21.180", "Normas Técnicas Digitales"]

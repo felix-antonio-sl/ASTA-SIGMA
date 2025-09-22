@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "kind",
+    "version",
+    "contract_id",
+    "product_name",
+    "owner_org",
+    "legal",
+    "interfaces",
+    "quality",
+    "incidents",
+    "evidence",
+    "x_overlay"
+  ],
+  "properties": {
+    "kind": { "const": "data_contract" },
+    "version": { "type": "string" },
+    "contract_id": { "type": "string" },
+    "product_name": { "type": "string" },
+    "owner_org": { "type": "string" },
+    "legal": {
+      "type": "object",
+      "required": ["lawful_basis", "privacy_by_design", "security_measures", "dpia_id", "retention_months", "dpo_contact"],
+      "properties": {
+        "lawful_basis": { "type": "string" },
+        "privacy_by_design": { "type": "boolean" },
+        "security_measures": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "dpia_id": { "type": "string" },
+        "retention_months": { "type": ["integer", "string"] },
+        "dpo_contact": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "interfaces": {
+      "type": "object",
+      "required": ["delivery_mode", "interoperability", "notification_channel"],
+      "properties": {
+        "delivery_mode": { "type": "string" },
+        "interoperability": { "type": "string" },
+        "notification_channel": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "quality": {
+      "type": "object",
+      "required": ["metrics"],
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "target"],
+            "properties": {
+              "name": { "type": "string" },
+              "target": { "type": ["number", "string"] }
+            },
+            "additionalProperties": true
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "incidents": {
+      "type": "object",
+      "required": ["breach_playbook", "notification_window"],
+      "properties": {
+        "breach_playbook": { "type": "string" },
+        "notification_window": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["audit_log"],
+      "properties": {
+        "audit_log": { "type": "string" },
+        "dossier_hash": { "type": ["boolean", "string"] }
+      },
+      "additionalProperties": true
+    },
+    "x_overlay": {
+      "type": "object",
+      "required": ["tde_cl"],
+      "properties": {
+        "tde_cl": {
+          "type": "object",
+          "required": ["electronic_support", "electronic_dossier", "electronic_notification"],
+          "properties": {
+            "electronic_support": { "type": "boolean" },
+            "electronic_dossier": { "type": "boolean" },
+            "electronic_notification": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

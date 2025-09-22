@@ -1,0 +1,33 @@
+kind: data_contract
+version: "1.0.0"
+contract_id: "DATA-XXX"
+product_name: "<dataset|expediente>"
+owner_org: "<servicio u OAE>"
+legal:
+  lawful_basis: "<ley/articulo>"
+  privacy_by_design: true
+  security_measures: ["encryption", "rbac_abac", "regular_review"]
+  dpia_id: "EIPD-XXX|no_aplica"
+  retention_months: "<N>"
+  dpo_contact: "<correo institucional>"
+interfaces:
+  delivery_mode: "API|Batch"
+  interoperability: "PISEE"
+  notification_channel: "Notificador/DDU"
+quality:
+  metrics:
+    - name: completeness
+      target: 0.99
+    - name: freshness_hours
+      target: 24
+incidents:
+  breach_playbook: "GO-007_Notificacion_Brechas_Datos"
+  notification_window: "sin_dilaciones_indebidas"
+evidence:
+  audit_log: "inmutable"
+  dossier_hash: true
+x_overlay:
+  tde_cl:
+    electronic_support: true
+    electronic_dossier: true
+    electronic_notification: true

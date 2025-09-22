@@ -1,0 +1,55 @@
+id: TPL-004
+version: 1.0.0
+status: draft
+date: 2024-05-01
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - MANUAL_ASTA-SIGMA
+  - GM-003
+  - GO-003
+kind: service_contract_template
+template:
+  contract_id: "SRV-XXX-001"
+  schema_version: "1.0.0"
+  system_id: "ST-XXX"
+  summary: >-
+    Describe the API capability, consumer and value delivered.  # Trad: Descripción resumida
+  producer_team: "Equipo Plataforma"
+  contact_email: "api-owner@example.org"
+  lifecycle:
+    release_status: "beta"
+    change_policy: "semver"
+  interface:
+    specification: "openapi/specs/srv-xxx-001.yaml"
+    style: "REST"
+    authentication: "oauth2_client_credentials"
+    rate_limits:
+      tier_r1: { requests_per_minute: 60 }
+      tier_r2: { requests_per_minute: 120 }
+      tier_r3: { requests_per_minute: 300 }
+  service_levels:
+    availability: { target: 0.995, window: "30d" }
+    latency_p95_ms: 800
+    error_budget_policy: "ADR-core-104"
+  obligations:
+    producer:
+      - "Publish contract tests in CI"
+      - "Expose status endpoint"
+    consumer:
+      - "Pin contract version"
+      - "Report incidents within 2h"
+  test_suite:
+    contract_tests:
+      tool: "dredd"
+      command: "npm run test:contract"
+    synthetic_monitoring:
+      provider: "checkly"
+      cadence: "5m"
+  dependencies:
+    upstream_services: ["SRV-AUTH-001"]
+    data_contracts: ["DATA-XXX-001"]
+  x_overlay:
+    tde_cl:
+      interoperability_network: "PISEE"
+      security_controls: ["mutual_tls", "auditable_logs"]
+      audit_references: ["POL-TRAZA-IA"]

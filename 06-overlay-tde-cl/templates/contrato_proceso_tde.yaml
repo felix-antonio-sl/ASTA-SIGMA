@@ -1,0 +1,42 @@
+kind: process_contract
+version: "1.0.0"
+contract_id: "PROC-XXX"
+process_name: "<nombre_proceso>"
+objective: "<resultado comprometido>"
+actors:
+  owner_unit: "<unidad responsable>"
+  supporting_roles: ["<rol>"]
+steps:
+  - id: "STEP-01"
+    name: "Validar antecedentes"
+    description: "<qué valida y por qué>"
+    controls:
+      - type: "human_check"
+        description: "Supervisor revisa excepciones"
+  - id: "STEP-02"
+    name: "Emitir resolución"
+    description: "<detalle>"
+    controls:
+      - type: "system"
+        description: "Firma electrónica avanzada"
+service_levels:
+  availability_pct: 99.5
+  latency_p95: "PT0.5S"
+hitl:
+  queues: ["aprobacion.excepciones"]
+  rules:
+    - "if risk_tier in [R2,R3] or confidence < 0.85 then escalate"
+audit:
+  log_store: "inmutable"
+  retention: "P5Y"
+x_overlay:
+  tde_cl:
+    legal_basis: "Ley 21.180"
+    regulation: "DS 4/2020"
+    technical_norms: ["Autenticacion", "Documentos_Expedientes", "Interoperabilidad", "Notificaciones", "Seguridad", "Calidad_Plataformas"]
+    electronic_dossier: true
+    interoperability_network: "PISEE"
+    repetitive_request_block: true
+    sensitive_data_authorization_logged: true
+    notification_channel: "Notificador/DDU"
+    notification_audit_trail: true

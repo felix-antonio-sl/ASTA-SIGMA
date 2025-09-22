@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://asta-sigma.gov/schemas/service_contract.schema.json",
+  "title": "ASTA-SIGMA Service Contract",
+  "type": "object",
+  "required": ["contract_id", "schema_version", "system_id", "interface", "service_levels"],
+  "properties": {
+    "contract_id": { "type": "string", "pattern": "^SRV-[A-Z0-9-]+$" },
+    "schema_version": { "type": "string" },
+    "system_id": { "type": "string", "pattern": "^ST-[A-Z0-9-]+$" },
+    "summary": { "type": "string" },
+    "producer_team": { "type": "string" },
+    "contact_email": { "type": "string", "format": "email" },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "release_status": { "type": "string" },
+        "change_policy": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "interface": {
+      "type": "object",
+      "required": ["specification", "style", "authentication"],
+      "properties": {
+        "specification": { "type": "string" },
+        "style": { "type": "string" },
+        "authentication": { "type": "string" },
+        "rate_limits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "requests_per_minute": { "type": "number", "minimum": 1 }
+            },
+            "required": ["requests_per_minute"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "service_levels": {
+      "type": "object",
+      "properties": {
+        "availability": {
+          "type": "object",
+          "properties": {
+            "target": { "type": "number", "minimum": 0, "maximum": 1 },
+            "window": { "type": "string" }
+          },
+          "required": ["target", "window"],
+          "additionalProperties": false
+        },
+        "latency_p95_ms": { "type": "number", "minimum": 0 },
+        "error_budget_policy": { "type": "string" }
+      },
+      "required": ["availability"],
+      "additionalProperties": false
+    },
+    "obligations": {
+      "type": "object",
+      "properties": {
+        "producer": { "type": "array", "items": { "type": "string" } },
+        "consumer": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "test_suite": {
+      "type": "object",
+      "properties": {
+        "contract_tests": {
+          "type": "object",
+          "properties": {
+            "tool": { "type": "string" },
+            "command": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "synthetic_monitoring": {
+          "type": "object",
+          "properties": {
+            "provider": { "type": "string" },
+            "cadence": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "upstream_services": { "type": "array", "items": { "type": "string" } },
+        "data_contracts": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "x_overlay": { "type": "object" }
+  },
+  "additionalProperties": false
+}

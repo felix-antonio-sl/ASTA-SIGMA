@@ -1,0 +1,33 @@
+kind: data_contract
+version: "1.0.0"
+contract_id: "DATA-EXPEDIENTE-001"
+product_name: "Expediente Subsidio X"
+owner_org: "ORG-SIGLA"
+legal:
+  lawful_basis: "Ley 19.880; Ley sectorial X"  # Trad: Base legal del tratamiento
+  privacy_by_design: true  # Trad: Privacidad por diseño
+  security_measures: ["encryption", "rbac_abac", "regular_review"]
+  dpia_id: "EIPD-2025-001"
+  retention_months: 60
+  dpo_contact: "dpo@org.cl"
+interfaces:
+  delivery_mode: "API"
+  interoperability: "PISEE"  # Trad: Red de interoperabilidad
+  notification_channel: "Notificador/DDU"
+quality:
+  metrics:
+    - name: completeness
+      target: 0.99
+    - name: freshness_hours
+      target: 24
+incidents:
+  breach_playbook: "GO-007_Notificacion_Brechas_Datos"
+  notification_window: "without undue delay"
+evidence:
+  audit_log: "immutable"
+  dossier_hash: true
+x_overlay:
+  tde_cl:
+    electronic_support: true
+    electronic_dossier: true
+    electronic_notification: true

@@ -1,0 +1,26 @@
+kind: agent_contract
+version: "1.0.0"
+agent_id: "AG-TRAMITE-001"
+hcai_purpose: "ASSIST"
+interaction_mode: "HUMAN_IN_THE_LOOP"
+legal:
+  lawful_purpose: "Support case file instruction"  # Trad: Propósito legal
+  personal_data_processing: true  # Trad: Trata datos personales
+  lawful_basis: "Ley 19.880; Ley 19.628"  # Trad: Base legal
+ia_risk:
+  level: "LIMITED"  # Trad: Nivel de riesgo IA
+  user_transparency: true
+  post_deployment_monitoring: true
+  kill_switch: true
+telemetry:
+  opentelemetry: true
+  min_log_fields: [trace_id, st_id, model_version, prompts_hash, incident_flag]
+x_overlay:
+  tde_cl:
+    authentication_method: "ClaveUnica"
+    interoperability_network: "PISEE"
+    notification_channel: "Notificador/DDU"
+    privacy_by_design: true
+    security_measures: ["encryption", "dlp", "regular_review"]
+    dpia_id: "no_aplica"
+    breach_playbook: "GO-007_Notificacion_Brechas_Datos"

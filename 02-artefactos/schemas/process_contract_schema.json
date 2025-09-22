@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["contract_id", "schema_version", "system_id", "process_name", "objective", "steps"],
+  "properties": {
+    "contract_id": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "system_id": { "type": "string" },
+    "process_name": { "type": "string" },
+    "objective": { "type": "string" },
+    "actors": { "type": "object" },
+    "steps": {
+      "type": "array",
+      "items": { "type": "object" },
+      "minItems": 1
+    },
+    "service_levels": { "type": "object" },
+    "hitl": { "type": "object" },
+    "audit": { "type": "object" },
+    "x_overlay": { "type": "object" }
+  },
+  "additionalProperties": true
+}

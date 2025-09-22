@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["contract_id", "schema_version", "system_id", "hcai_purpose", "interaction_mode", "delegated_role"],
+  "properties": {
+    "contract_id": { "type": "string" },
+    "schema_version": { "type": "string" },
+    "system_id": { "type": "string" },
+    "hcai_purpose": { "type": "string" },
+    "cognition_cycle": { "type": "string" },
+    "interaction_mode": { "type": "string" },
+    "delegated_role": { "type": "string" },
+    "hitl_checkpoints": { "type": "array", "items": { "type": "object" } },
+    "safeguards": { "type": "object" },
+    "legal": { "type": "object" },
+    "telemetry": { "type": "object" },
+    "evaluation": { "type": "object" },
+    "x_overlay": { "type": "object" }
+  },
+  "additionalProperties": true
+}

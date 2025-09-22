@@ -1,0 +1,33 @@
+id: POL-TEMP-LLM
+version: 1.0.0
+status: active
+date: 2025-09-18
+owner: Oficina de Transformación Digital GORE Ñuble
+related:
+  - GO-003
+  - GO-002
+terms:
+  - name: "Límites de Temperatura para Agentes LLM"
+    policy:
+      name: "Política de Control de Creatividad de LLM"
+      description: "Establece límites de temperatura/top_p para mitigar alucinaciones en tareas sensibles."
+      rules:
+        - id: "temp-rule-001"
+          name: "Límites de Temperatura por Tipo de Tarea"
+          description: "Define la temperatura máxima permitida según la naturaleza de la tarea."
+          task_types:
+            operativa_normativa:
+              temperatura_max: 0.2
+              top_p_max: 0.7
+            analisis_tactico:
+              temperatura_max: 0.5
+              top_p_max: 0.9
+            generacion_creativa:
+              temperatura_max: 0.8
+              top_p_max: 1.0
+        - id: "temp-rule-002"
+          name: "HITL Obligatorio para Alta Creatividad"
+          description: "Las tareas con temperatura > 0.5 requieren supervisión humana."
+          condition: "task.temperatura > 0.5"
+          evidenceRequired:
+            - "El contrato de agente debe especificar una regla HITL asociada."
