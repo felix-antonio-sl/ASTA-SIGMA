@@ -1,0 +1,35 @@
+# Política Computable de FinOps para Agentes de IA
+id: POL-FINOPS-IA
+version: 1.0
+status: active
+date: '2025-09-22'
+
+terms:
+  - name: "Reglas de FinOps para Agentes de IA"
+    policy:
+      name: "Política de Control de Costos y Presupuestos para IA"
+      description: "Establece los límites de gasto, alertas y acciones automáticas para todos los agentes de IA, con reglas diferenciadas por Tier de Riesgo."
+      definition:
+        implementation_point: "API Gateway and Observability Platform"
+        override_process_ref: "The manual override process for R3 systems must be documented in a GO."
+      rules:
+        - id: "finops-rule-001"
+          name: "Presupuesto Mensual Obligatorio"
+          description: "Todo agente debe tener un presupuesto definido en su Contrato."
+          evidenceRequired:
+            - "El campo `costos.budget_usd_mensual` en el Contrato de Agente debe ser > 0."
+        - id: "finops-rule-002"
+          name: "Alerta de Consumo de Presupuesto"
+          description: "Se debe generar una alerta cuando el consumo del presupuesto mensual exceda el 80%."
+          condition: "consumo_actual_usd / budget_usd_mensual >= 0.8"
+          action: "Notificar al Equipo de Flujo de Valor y al Líder de FinOps."
+        - id: "finops-rule-003"
+          name: "Rate-Limit y Hard-Stop por Tier de Riesgo"
+          description: "Acciones automáticas al exceder el 100% del presupuesto."
+          rules_by_tier:
+            R1_BAJO:
+              action: "Activar hard-stop del servicio."
+            R2_MEDIO:
+              action: "Activar hard-stop del servicio."
+            R3_ALTO:
+              action: "Activar rate-limit severo y requerir aprobación manual para override."

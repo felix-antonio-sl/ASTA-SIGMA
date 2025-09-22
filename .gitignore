@@ -1,0 +1,27 @@
+# Archivos del sistema
+.DS_Store
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+
+# Directorios
+temp/
+build/
+
+# Entornos virtuales
+venv/
+env/
+
+# Archivos de IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Archivos de datos sensibles
+*.env
+*.secret
+*.key
