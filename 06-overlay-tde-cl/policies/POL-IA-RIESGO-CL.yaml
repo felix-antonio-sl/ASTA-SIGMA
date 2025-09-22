@@ -1,0 +1,27 @@
+metadata:
+  id: POL-IA-RIESGO-CL
+  version: 0.1.0
+  status: draft
+  date: '2025-01-20'
+  owner: Unidad IA Gobierno Digital
+  related:
+    - ../guias_operativas/GO-008_Incidentes_IA.md
+policy:
+  risk_levels: [INACEPTABLE, ALTO, LIMITADO, MINIMO]
+  controls_by_risk:
+    INACEPTABLE:
+      prohibited: true
+    ALTO:
+      required_controls:
+        - risk_management_system
+        - technical_and_user_documentation
+        - pre_deployment_testing
+        - post_deployment_monitoring
+        - kill_switch
+        - event_logging_and_model_versioning
+    LIMITADO:
+      required_controls: [user_transparency]
+    MINIMO:
+      required_controls: [general_ai_principles]
+  incident_reporting:
+    authority: APDP

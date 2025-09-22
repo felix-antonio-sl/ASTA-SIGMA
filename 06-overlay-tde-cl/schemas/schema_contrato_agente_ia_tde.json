@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metadata", "contract"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "version", "status", "date", "owner", "related"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "status": {"type": "string"},
+        "date": {"type": "string"},
+        "owner": {"type": "string"},
+        "related": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": ["kind", "agent_id", "hcai_purpose", "interaction_mode", "legal", "risk", "observability", "overlays"],
+      "properties": {
+        "kind": {"const": "agent_contract"},
+        "agent_id": {"type": "string"},
+        "hcai_purpose": {"type": "string"},
+        "interaction_mode": {"type": "string"},
+        "legal": {
+          "type": "object",
+          "required": ["legal_purpose", "personal_data_processing", "legal_basis"],
+          "properties": {
+            "legal_purpose": {"type": "string"},
+            "personal_data_processing": {"type": ["boolean", "string"]},
+            "legal_basis": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "risk": {
+          "type": "object",
+          "required": ["level", "user_transparency", "post_deployment_monitoring", "kill_switch"],
+          "properties": {
+            "level": {"type": "string"},
+            "user_transparency": {"type": "boolean"},
+            "post_deployment_monitoring": {"type": "boolean"},
+            "kill_switch": {"type": "boolean"}
+          }
+        },
+        "observability": {
+          "type": "object",
+          "required": ["opentelemetry_enabled", "minimum_log_fields"],
+          "properties": {
+            "opentelemetry_enabled": {"type": "boolean"},
+            "minimum_log_fields": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "overlays": {
+          "type": "object",
+          "properties": {
+            "tde_cl": {
+              "type": "object",
+              "required": ["authentication", "interoperability", "notification", "dp_21719"],
+              "properties": {
+                "authentication": {"type": "string"},
+                "interoperability": {"type": "string"},
+                "notification": {"type": "string"},
+                "dp_21719": {
+                  "type": "object",
+                  "required": ["privacy_by_design", "security_measures", "eipd_id", "governance_gaps"],
+                  "properties": {
+                    "privacy_by_design": {"type": "boolean"},
+                    "security_measures": {"type": "array", "items": {"type": "string"}},
+                    "eipd_id": {"type": "string"},
+                    "governance_gaps": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

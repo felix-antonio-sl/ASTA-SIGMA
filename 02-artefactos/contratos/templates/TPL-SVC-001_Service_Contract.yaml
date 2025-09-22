@@ -1,0 +1,86 @@
+metadata:
+  id: TPL-SVC-001
+  version: 1.0.0
+  status: draft
+  date: '2025-01-01'
+  owner: ASTA-SIGMA Core Team
+  related:
+    - ../../Matriz_Gobernanza_CI.md
+contract_type: service_contract
+service:
+  service_id: SVC-XXX
+  name: <Human readable name>
+  summary: <Short description of the service>
+  owners:
+    - team_id: EFV-XXX
+      contact: owner@example.gov
+  tiers:
+    risk: R1
+    availability_class: GOLD
+endpoints:
+  - name: <Endpoint name>
+    description: <What the endpoint does>
+    interface_type: REST # Trad: Tipo de interfaz (REST, GraphQL, gRPC)
+    specification:
+      format: openapi
+      ref: ./openapi/service.yaml # Trad: Ruta relativa a la especificación OpenAPI
+    consumers:
+      - st_id: ST-XXX
+        purpose: <Why the consumer uses this API>
+performance:
+  slo:
+    availability_target: 0.990
+    latency_p95_ms: 500
+    error_budget_days: 3
+  capacity:
+    max_rps: 100
+    burst_rps: 150
+observability:
+  traces_required: true
+  log_fields:
+    - trace_id
+    - span_id
+    - st_id
+    - service_version
+security:
+  authentication: oauth2
+  authorization_scope: <scope>
+  rate_limits:
+    policy_ref: ../../05-policies/POL-FINOPS-IA.yaml
+    overrides:
+      - tier: R3
+        max_rps: 50
+  data_protection:
+    handles_pii: false
+    encryption_at_rest: true
+    encryption_in_transit: true
+compliance:
+  policies:
+    - ../../05-policies/POL-TRAZA-IA.yaml
+  overlays:
+    - name: tde_cl
+      policy_refs:
+        - ../../06-overlay-tde-cl/policies/POL-TDE-PLATAFORMAS.yaml
+        - ../../06-overlay-tde-cl/policies/POL-DATOS-21719.yaml
+dependencies:
+  upstream_services:
+    - service_id: SVC-UP-001
+      contract_ref: ../instances/SVC-UP-001.yaml
+      dependency_type: synchronous
+  data_contracts:
+    - data_contract_id: DATA-XXX
+      contract_ref: ../datos/DATA-XXX.yaml
+      purpose: analytics_feed
+change_management:
+  owner_role: Product Owner
+  review_cadence: quarterly
+  versioning_strategy: semver
+  contact_channel: slack://asta-sigma-service
+  rollback_plan: <Link to runbook>
+testing:
+  contract_tests:
+    tool: dredd
+    location: tests/contracts
+  sandbox_available: true
+notes: |
+  # Trad: agregue cualquier información contextual relevante.

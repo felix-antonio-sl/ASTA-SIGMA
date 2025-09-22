@@ -1,0 +1,39 @@
+# Política Computable de Trazabilidad para Agentes de IA
+metadata:
+  id: POL-TRAZA-IA
+  version: 1.0.0
+  status: active
+  date: '2025-09-22'
+  owner: ASTA-SIGMA SRE Guild
+  related:
+    - ../04-adrs/core/ADR-core-103_Estandar_Telemetria_OTel_IA_RAG.md
+
+terms:
+  - name: "Cobertura de Telemetría OTel para IA/RAG"
+    policy:
+      name: "Política de Trazabilidad de IA"
+      description: "Garantiza que todas las transacciones de agentes de IA de riesgo generen evidencia forense completa y auditable, según el estándar OTel definido en ADR-003."
+      definition:
+        coverage_formula: "ai_interactions_traced / ai_interactions_total"
+        ai_interactions_total: "count(requests where component='agent' and outcome in ['ok','error'])"
+        ai_interactions_traced: "count(requests with span_kind='client' and attributes contains ['ai.model','ai.tokens_in'])"
+        min_coverage_pct_by_tier:
+          R1_BAJO: 90
+          R2_MEDIO: 95
+          R3_ALTO: 98
+        required_attributes:
+          - ai.provider
+          - ai.model
+          - ai.tokens_in
+          - ai.tokens_out
+          - ai.ttft_ms
+          - ai.rag.citations_count
+          - ai.rag.retrieved_docs
+      rules:
+        - id: "traza-rule-001"
+          name: "Cobertura de Trazas en Sistemas de Riesgo"
+          description: "Los agentes en sistemas R2 y R3 deben tener una cobertura de trazas OTel completa."
+          condition: "sistema.risk_tier in ['R2_MEDIO', 'R3_ALTO']"
+          evidenceRequired:
+            - "El pipeline de CI/CD debe demostrar una cobertura de spans OTel >= 95% para los flujos de IA."
+            - "El `Contrato de Agente` debe tener el campo `telemetria.opentelemetry` en `true`."

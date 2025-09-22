@@ -1,0 +1,39 @@
+# Politica de SLOs Minimos por Tier de Riesgo (v1.1 con IA/FinOps)
+# Define objetivos mínimos de confiabilidad, calidad y costo validados en CI/CD.
+metadata:
+  id: POL-SLO-RISK
+  version: 1.1.0
+  status: active
+  date: '2025-09-22'
+  owner: ASTA-SIGMA SRE Guild
+  related:
+    - ../03-guias/marco/GM-002_Evaluacion_Clasificacion_Riesgo_ST.md
+    - ../02-artefactos/Matriz_Gobernanza_CI.md
+terms:
+  - name: "SLOs por Tier de Riesgo"
+    risk_tiers:
+      R1_LOW:
+        availability_pct: 99.0
+        latency_p95_ms: 2500
+        ttft_p95_ms: 1500
+        max_error_pct: 5
+        max_cost_per_1k_tokens_usd: 0.04 # Trad: costo máximo por 1k tokens
+      R2_MEDIUM:
+        availability_pct: 99.5
+        latency_p95_ms: 1500
+        ttft_p95_ms: 900
+        max_error_pct: 2
+        max_cost_per_1k_tokens_usd: 0.06
+        min_fidelity: 0.97 # Trad: fidelidad mínima
+        min_citation_precision: 0.98 # Trad: precisión mínima de citas
+      R3_HIGH:
+        availability_pct: 99.9
+        latency_p95_ms: 500
+        ttft_p95_ms: 400
+        max_error_pct: 1
+        max_cost_per_1k_tokens_usd: 0.08
+        min_fidelity: 0.98
+        min_citation_precision: 0.99
+    error_budget:
+      window_days: 30
+      actions_when_breached: ["freeze_deployments", "shadow_ab", "postmortem_required"] # Trad: acciones cuando el presupuesto se agota

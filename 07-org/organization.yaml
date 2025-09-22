@@ -1,0 +1,22 @@
+metadata:
+  id: ORG-ROOT
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA Governance Team
+  related:
+    - governance/RACI.md
+    - governance/comite_tic_ctd.md
+organization:
+  org_id: ORG-SIGLA
+  name: "Nombre Oficial de la Organización" # Trad: nombre oficial
+  legal_mandate: ["Ley 18.575", "Ley 21.658", "Ley 21.180"]
+  key_contacts:
+    ctd: "Nombre CTD <ctd@org.cl>"
+    dpo: "Nombre DPO <dpo@org.cl>"
+    ciso: "Nombre CISO <ciso@org.cl>"
+principles:
+  egd2030: [digital_por_diseno, centrado_en_personas, gobierno_integrado]
+  mgde: [datos_activo_estrategico, catalogo_mandatorio, responsable_por_dato]
+notes: |
+  Ajusta esta ficha como “fuente única” de identidad institucional del marco.

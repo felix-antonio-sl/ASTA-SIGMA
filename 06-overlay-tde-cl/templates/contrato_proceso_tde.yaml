@@ -1,0 +1,36 @@
+metadata:
+  id: TPL-PROCESS-TDE-001
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA TDE-CL Team
+  related:
+    - ../policies/POL-TDE-PLATAFORMAS.yaml
+contract:
+  kind: process_contract
+  process_name: "<nombre_proceso>"
+  overlays:
+    tde_cl:
+      base_law: "Ley 21.180"
+      regulation: "DS 4/2020"
+      technical_standards: ["Autenticacion", "Documentos_Expedientes", "Interoperabilidad", "Notificaciones", "Seguridad", "Calidad_Plataformas"]
+      electronic_dossier: true
+      interoperability:
+        platform: PISEE
+        once_only_principle: true
+        sensitive_data_authorization_logged: true
+      notification:
+        platform: Notificador/DDU
+        event_logging_enabled: true
+  service_levels:
+    availability_pct: 99.5
+    latency_p95: PT0.5S
+    recovery_time_objective_hours: 4
+    recovery_point_objective_minutes: 30
+  human_in_the_loop:
+    queues: ["aprobacion.excepciones"]
+    rules:
+      - "if risk in ['R2','R3'] or confidence<0.85 then require_human_review"
+  audit:
+    activity_log: immutable
+    retention: P5Y

@@ -1,0 +1,13 @@
+metadata:
+  id: UN-EJEMPLO
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA Governance Team
+  related:
+    - ../organization.yaml
+unit:
+  unit_id: UN-EJEMPLO
+  name: "División/Departamento de Ejemplo" # Trad: nombre de la unidad
+  capabilities: [gestion_actos_adm, notificaciones, compliance]
+  lead_contact: "Jefe/a Unidad <jefatura@org.cl>"

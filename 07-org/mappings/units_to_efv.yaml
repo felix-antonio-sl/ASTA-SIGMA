@@ -1,0 +1,12 @@
+metadata:
+  id: MAP-UNIT-EFV
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA Governance Team
+  related:
+    - ../units/UN-EJEMPLO.yaml
+    - ../value_streams/EFV-EJEMPLO.yaml
+mappings:
+  - unit_id: UN-EJEMPLO
+    value_streams: [EFV-EJEMPLO]
