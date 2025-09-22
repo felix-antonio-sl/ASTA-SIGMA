@@ -1,0 +1,33 @@
+metadata:
+  id: POL-TEMP-LLM
+  version: 1.0.0
+  status: active
+  date: '2025-09-22'
+  owner: ASTA-SIGMA IA Guild
+  related:
+    - ../03-guias/operativas/GO-002_Monitoreo_Calidad_Agentes_IA.md
+terms:
+  - name: "Límites de Temperatura para Agentes LLM"
+    policy:
+      name: "Política de Control de Creatividad de LLM"
+      description: "Establece límites de temperatura/top-p para mitigar alucinaciones en tareas sensibles."
+      rules:
+        - id: "temp-rule-001"
+          name: "Límites de Temperatura por Tipo de Tarea"
+          description: "Define la temperatura máxima permitida según la naturaleza de la tarea."
+          task_types:
+            normative_operations: # Trad: tareas basadas en normativa
+              max_temperature: 0.2
+              max_top_p: 0.7
+            tactical_analysis: # Trad: análisis y síntesis
+              max_temperature: 0.5
+              max_top_p: 0.9
+            creative_generation: # Trad: ideación o borrador
+              max_temperature: 0.8
+              max_top_p: 1.0
+        - id: "temp-rule-002"
+          name: "HITL Obligatorio para Alta Creatividad"
+          description: "Las tareas que permiten alta creatividad requieren supervisión humana obligatoria."
+          condition: "task.temperature > 0.5"
+          evidence_required:
+            - "El `Contrato de Agente` debe especificar una regla HITL para este escenario."

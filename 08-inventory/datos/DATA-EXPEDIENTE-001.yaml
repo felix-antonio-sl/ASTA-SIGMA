@@ -1,0 +1,37 @@
+metadata:
+  id: DATA-EXPEDIENTE-001
+  version: 1.0.0
+  status: draft
+  date: '2025-01-20'
+  owner: Equipo Trámite Digital
+  related:
+    - ../st/ST-TRAMITE-001.md
+contract:
+  kind: data_contract
+  product_name: "Expediente Subsidio X"
+  owning_org: ORG-SIGLA
+  legal:
+    legal_basis: "Ley 19.880; Ley sectorial X"
+    privacy_by_design: true # Trad: privacidad por diseño
+    data_protection_officer_contact: "dpo@org.cl"
+    eipd_id: "EIPD-2025-001"
+  retention:
+    months: 60
+  audit:
+    immutable_log: true
+    hashed_records: true
+  security_measures: ["encryption", "rbac_abac", "regular_reviews"]
+  breach_response:
+    playbook: "GO-007_Notificacion_Brechas_Datos"
+    notification_window: immediate
+  overlays:
+    tde_cl:
+      electronic_support: true
+      interoperability_channel: PISEE
+      electronic_dossier: true
+      electronic_notification: true
+      dp_21719:
+        privacy_by_design: true
+        security_measures: ["encryption", "rbac_abac", "regular_reviews"]
+        eipd_id: "EIPD-2025-001"
+        governance_gaps: "GO-007_Notificacion_Brechas_Datos"

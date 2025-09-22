@@ -1,0 +1,62 @@
+# Ficha de Portafolio de Transformación
+metadata:
+  id: TPL-PORT-001
+  version: 1.0.0
+  status: active
+  date: 'YYYY-MM-DD'
+  owner: "Oficina de Transformación Digital"
+  related:
+    - ../Matriz_Gobernanza_CI.md
+
+portfolio:
+  name: "Portafolio de Transformación Digital GORE Ñuble"
+  vision: "Transformar al GORE Ñuble en una organización data-driven, ágil y centrada en el ciudadano, potenciada por capacidades digitales y de inteligencia artificial."
+
+  # Pilares que guían la inversión y el esfuerzo
+  strategicPillars:
+    - id: "PILLAR-01"
+      name: "Eficiencia Operacional Interna"
+      description: "Optimizar y automatizar los procesos internos para reducir costos, tiempos de ciclo y errores."
+    - id: "PILLAR-02"
+      name: "Servicios al Ciudadano de Excelencia"
+      description: "Crear canales digitales y servicios proactivos que mejoren la experiencia del ciudadano."
+    - id: "PILLAR-03"
+      name: "Liderazgo Territorial Basado en Datos"
+      description: "Utilizar datos y analítica avanzada para mejorar la toma de decisiones en la planificación y gestión del territorio."
+
+  # KPIs que miden el éxito del portafolio completo
+  keyPerformanceIndicators:
+    - id: "KPI-ORG-01"
+      name: "Índice de Madurez Digital Organizacional"
+      target: "Aumentar de 2.5 a 4.0 en 24 meses."
+      pillar: "PILLAR-01"
+    - id: "KPI-ORG-02"
+      name: "Índice de Satisfacción Ciudadana (CSAT) con Canales Digitales"
+      target: ">85%"
+      pillar: "PILLAR-02"
+    - id: "KPI-ORG-03"
+      name: "% de Decisiones de Inversión Territorial Basadas en Evidencia de la IDE"
+      target: ">70%"
+      pillar: "PILLAR-03"
+
+  # Inventario de los componentes del portafolio
+  inventory:
+    systemsOfWork:
+      - id: "ST-NEXO-GORE"
+        strategicPillar: "PILLAR-01"
+      - id: "ST-MI-NUBLE"
+        strategicPillar: "PILLAR-02"
+      - id: "ST-IDE-NUBLE"
+        strategicPillar: "PILLAR-03"
+      - id: "ST-DATOS-ANALITICOS"
+        strategicPillar: "PILLAR-03"
+      - id: "ST-CIES-SEGURIDAD"
+        strategicPillar: "PILLAR-02"
+
+    initiatives:
+      - id: "INIT-NUBLE-001"
+        name: "Piloto Escudo CGR"
+        strategicPillar: "PILLAR-01"
+      - id: "INIT-NUBLE-002"
+        name: "Piloto Agilizador de Convenios"
+        strategicPillar: "PILLAR-01"

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metadata", "contract"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "version", "status", "date", "owner", "related"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "status": {"type": "string"},
+        "date": {"type": "string"},
+        "owner": {"type": "string"},
+        "related": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": ["kind", "process_name", "overlays", "service_levels", "human_in_the_loop", "audit"],
+      "properties": {
+        "kind": {"const": "process_contract"},
+        "process_name": {"type": "string"},
+        "overlays": {
+          "type": "object",
+          "properties": {
+            "tde_cl": {
+              "type": "object",
+              "required": ["base_law", "regulation", "technical_standards", "electronic_dossier", "interoperability", "notification"],
+              "properties": {
+                "base_law": {"type": "string"},
+                "regulation": {"type": "string"},
+                "technical_standards": {"type": "array", "items": {"type": "string"}},
+                "electronic_dossier": {"type": "boolean"},
+                "interoperability": {
+                  "type": "object",
+                  "required": ["platform", "once_only_principle", "sensitive_data_authorization_logged"],
+                  "properties": {
+                    "platform": {"type": "string"},
+                    "once_only_principle": {"type": "boolean"},
+                    "sensitive_data_authorization_logged": {"type": "boolean"}
+                  }
+                },
+                "notification": {
+                  "type": "object",
+                  "required": ["platform", "event_logging_enabled"],
+                  "properties": {
+                    "platform": {"type": "string"},
+                    "event_logging_enabled": {"type": "boolean"}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "service_levels": {
+          "type": "object",
+          "required": ["availability_pct", "latency_p95", "recovery_time_objective_hours", "recovery_point_objective_minutes"],
+          "properties": {
+            "availability_pct": {"type": "number"},
+            "latency_p95": {"type": "string"},
+            "recovery_time_objective_hours": {"type": "number"},
+            "recovery_point_objective_minutes": {"type": "number"}
+          }
+        },
+        "human_in_the_loop": {
+          "type": "object",
+          "required": ["queues", "rules"],
+          "properties": {
+            "queues": {"type": "array", "items": {"type": "string"}},
+            "rules": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "audit": {
+          "type": "object",
+          "required": ["activity_log", "retention"],
+          "properties": {
+            "activity_log": {"type": "string"},
+            "retention": {"type": "string"}
+          }
+        }
+      }
+    }
+  }
+}

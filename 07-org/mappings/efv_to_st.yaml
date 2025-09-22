@@ -1,0 +1,13 @@
+# Completa con tus primeros ST (p. ej. ST-TRAMITE-001)
+metadata:
+  id: MAP-EFV-ST
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA Governance Team
+  related:
+    - ../value_streams/EFV-EJEMPLO.yaml
+    - ../../08-inventory/st/ST-TRAMITE-001.md
+mappings:
+  - value_stream_id: EFV-EJEMPLO
+    systems_of_work: []

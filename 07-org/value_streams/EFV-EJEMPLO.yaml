@@ -1,0 +1,13 @@
+metadata:
+  id: EFV-EJEMPLO
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA Governance Team
+  related:
+    - ../units/UN-EJEMPLO.yaml
+value_stream:
+  value_stream_id: EFV-EJEMPLO
+  mission: "Entregar servicios digitales simples e inclusivos"
+  key_metrics: [tiempo_ciclo, nps, tasa_exito]
+  supporting_units: [UN-EJEMPLO]

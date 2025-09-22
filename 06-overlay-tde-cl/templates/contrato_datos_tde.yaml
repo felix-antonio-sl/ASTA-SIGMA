@@ -1,0 +1,37 @@
+metadata:
+  id: TPL-DATA-TDE-001
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA TDE-CL Team
+  related:
+    - ../../05-policies/POL-DATOS-21719.yaml
+contract:
+  kind: data_contract
+  product_name: "<dataset|expediente>"
+  owning_org: "<servicio u OAE>"
+  legal:
+    legal_basis: "<ley/articulo>"
+    privacy_by_design: true
+    data_protection_officer_contact: "<correo institucional>"
+    eipd_id: "<EIPD-XXX|no_aplica>"
+  retention:
+    months: "<N>"
+  audit:
+    immutable_log: true
+    hashed_records: true
+  security_measures: ["encryption", "rbac_abac", "regular_reviews"]
+  breach_response:
+    playbook: "GO-007_Notificacion_Brechas_Datos"
+    notification_window: immediate
+  overlays:
+    tde_cl:
+      electronic_support: true
+      interoperability_channel: PISEE
+      electronic_dossier: true
+      electronic_notification: true
+      dp_21719:
+        privacy_by_design: true
+        security_measures: ["encryption", "rbac_abac", "regular_verification"]
+        eipd_id: "<EIPD-XXX|no_aplica>"
+        governance_gaps: "<referencia_politica|no_aplica>"

@@ -1,0 +1,35 @@
+metadata:
+  id: TPL-AGENT-TDE-001
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA TDE-CL Team
+  related:
+    - ../policies/POL-IA-RIESGO-CL.yaml
+contract:
+  kind: agent_contract
+  agent_id: "<AG-XXX>"
+  hcai_purpose: "<ASSIST|AUGMENT|...>"
+  interaction_mode: HUMAN_IN_THE_LOOP
+  legal:
+    legal_purpose: "<mandato legal>"
+    personal_data_processing: "<true|false>"
+    legal_basis: ["<ley/articulo>"]
+  risk:
+    level: "<INACEPTABLE|ALTO|LIMITADO|MINIMO>"
+    user_transparency: true
+    post_deployment_monitoring: true
+    kill_switch: true
+  observability:
+    opentelemetry_enabled: true
+    minimum_log_fields: [trace_id, st_id, model_version, prompts_hash, incident_flag]
+  overlays:
+    tde_cl:
+      authentication: "ClaveUnica|OIDC institucional"
+      interoperability: PISEE
+      notification: Notificador/DDU
+      dp_21719:
+        privacy_by_design: true
+        security_measures: ["encryption", "dlp", "regular_verification"]
+        eipd_id: "<EIPD-XXX|no_aplica>"
+        governance_gaps: "GO-007_Notificacion_Brechas_Datos"

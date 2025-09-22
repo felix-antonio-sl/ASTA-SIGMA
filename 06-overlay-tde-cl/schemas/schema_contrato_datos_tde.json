@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metadata", "contract"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "version", "status", "date", "owner", "related"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "status": {"type": "string"},
+        "date": {"type": "string"},
+        "owner": {"type": "string"},
+        "related": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "contract": {
+      "type": "object",
+      "required": ["kind", "product_name", "owning_org", "legal", "retention", "audit", "security_measures", "overlays"],
+      "properties": {
+        "kind": {"const": "data_contract"},
+        "product_name": {"type": "string"},
+        "owning_org": {"type": "string"},
+        "legal": {
+          "type": "object",
+          "required": ["legal_basis", "privacy_by_design", "data_protection_officer_contact", "eipd_id"],
+          "properties": {
+            "legal_basis": {"type": "string"},
+            "privacy_by_design": {"type": "boolean"},
+            "data_protection_officer_contact": {"type": "string"},
+            "eipd_id": {"type": "string"}
+          }
+        },
+        "retention": {
+          "type": "object",
+          "required": ["months"],
+          "properties": {
+            "months": {"type": ["integer", "string"]}
+          }
+        },
+        "audit": {
+          "type": "object",
+          "required": ["immutable_log", "hashed_records"],
+          "properties": {
+            "immutable_log": {"type": "boolean"},
+            "hashed_records": {"type": "boolean"}
+          }
+        },
+        "security_measures": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "breach_response": {
+          "type": "object",
+          "properties": {
+            "playbook": {"type": "string"},
+            "notification_window": {"type": "string"}
+          }
+        },
+        "overlays": {
+          "type": "object",
+          "properties": {
+            "tde_cl": {
+              "type": "object",
+              "required": ["electronic_support", "interoperability_channel", "electronic_dossier", "electronic_notification", "dp_21719"],
+              "properties": {
+                "electronic_support": {"type": "boolean"},
+                "interoperability_channel": {"type": "string"},
+                "electronic_dossier": {"type": "boolean"},
+                "electronic_notification": {"type": "boolean"},
+                "dp_21719": {
+                  "type": "object",
+                  "required": ["privacy_by_design", "security_measures", "eipd_id", "governance_gaps"],
+                  "properties": {
+                    "privacy_by_design": {"type": "boolean"},
+                    "security_measures": {"type": "array", "items": {"type": "string"}},
+                    "eipd_id": {"type": "string"},
+                    "governance_gaps": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

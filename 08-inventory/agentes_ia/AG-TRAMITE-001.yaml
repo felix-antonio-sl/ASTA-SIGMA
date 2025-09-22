@@ -1,0 +1,35 @@
+metadata:
+  id: AG-TRAMITE-001
+  version: 1.1.0
+  status: active
+  date: '2025-09-16'
+  owner: Equipo Trámite Digital
+  related:
+    - ../st/ST-TRAMITE-001.md
+contract:
+  kind: agent_contract
+  agent_id: AG-TRAMITE-001
+  hcai_purpose: ASSIST
+  interaction_mode: HUMAN_IN_THE_LOOP
+  legal:
+    legal_purpose: "Apoyo a instrucción de expediente"
+    personal_data_processing: true
+    legal_basis: ["Ley 19.880", "Ley 19.628"]
+  overlays:
+    tde_cl:
+      authentication: ClaveUnica
+      interoperability: PISEE
+      notification: Notificador/DDU
+      dp_21719:
+        privacy_by_design: true
+        security_measures: ["encryption", "dlp", "regular_verification"]
+        eipd_id: "EIPD-2025-001"
+        governance_gaps: "GO-007_Notificacion_Brechas_Datos"
+  risk:
+    level: LIMITED
+    user_transparency: true
+    post_deployment_monitoring: true
+    kill_switch: true
+  observability:
+    opentelemetry_enabled: true
+    minimum_log_fields: [trace_id, st_id, model_version, prompts_hash, incident_flag]

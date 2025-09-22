@@ -1,0 +1,20 @@
+metadata:
+  id: POL-TDE-PLATAFORMAS
+  version: 0.1.0
+  status: draft
+  date: '2025-01-20'
+  owner: Unidad Gobierno Digital
+  related:
+    - ../guias_operativas/GO-009_Interoperabilidad_PISEE.md
+policy:
+  scope_description: "Integraciones oficiales del Estado"
+  required_integrations:
+    identity: ClaveUnica
+    signature: FirmaGob
+    documentary_record: DocDigital
+    interoperability: PISEE
+    notifications: Notificador/DDU
+  service_quality:
+    agreed_downtime_allowed: true
+    mandatory_bcp_drp_plan: true
+    contingency_testing_frequency: semestral

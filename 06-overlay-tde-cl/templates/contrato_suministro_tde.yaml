@@ -1,0 +1,30 @@
+metadata:
+  id: TPL-SUPPLY-TDE-001
+  version: 1.0.0
+  status: draft
+  date: 'YYYY-MM-DD'
+  owner: ASTA-SIGMA TDE-CL Team
+  related:
+    - ../policies/POL-TDE-PLATAFORMAS.yaml
+contract:
+  kind: supply_contract
+  service_name: "<API/Plataforma>"
+  scope: "Identidad|Interoperabilidad|Documental|Notificador|Firma"
+  service_levels:
+    availability_pct: 99.5
+    latency_p95_ms: 800
+    recovery_time_objective_hours: 4
+    recovery_point_objective_minutes: 30
+  continuity:
+    dr_bc_plan: true
+    contingency_testing: semestral # Trad: periodicidad de pruebas
+  security:
+    siem_integration: true
+    encryption_in_transit: TLS1.2+
+    encryption_at_rest: AES-256
+  audit:
+    audit_rights_granted: true
+    reporting_frequency: mensual
+  limits:
+    rate_limit_rps: 50
+    monthly_quota: 1000000
