@@ -1,0 +1,213 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Agent Contract",
+  "description": "Schema for validating an AI Agent Contract.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "agent_contract"
+    },
+    "agent_id": {
+      "type": "string",
+      "pattern": "^AG-[0-9]{3}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "model": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        }
+      },
+      "required": ["provider", "name"]
+    },
+    "hcai_purpose": {
+      "type": "string",
+      "enum": ["ASSIST", "AUGMENT", "ORCHESTRATE", "AUTOMATE"]
+    },
+    "cognitive_function": {
+      "type": "string",
+      "enum": ["SENSE", "DECIDE", "ACT", "SENSE_AND_DECIDE", "DECIDE_AND_ACT", "SENSE_DECIDE_ACT"]
+    },
+    "autonomy_level": {
+      "type": "string",
+      "enum": ["NONE", "ASSISTED", "SUPERVISED", "RAG", "SEMIAUTONOMOUS", "AUTONOMOUS"]
+    },
+    "responsibility_level": {
+      "type": "string",
+      "enum": ["PROVIDE_INFO", "RECOMMEND", "APPROVE", "EXECUTE"]
+    },
+    "interaction_mode": {
+      "type": "string",
+      "enum": ["HUMAN_IN_THE_LOOP", "HUMAN_OVER_THE_LOOP", "MACHINE_IN_THE_LOOP"]
+    },
+    "legal_purpose": {
+      "type": "string"
+    },
+    "base_legal_uso_datos": {
+      "type": "string"
+    },
+    "final_human_supervisor": {
+      "type": "string"
+    },
+    "telemetry": {
+      "type": "object",
+      "properties": {
+        "openTelemetry": {
+          "type": "boolean"
+        },
+        "correlationFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minLogFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["openTelemetry"]
+    },
+    "costs": {
+      "type": "object",
+      "properties": {
+        "monthlyTokenBudget": {
+          "type": "integer"
+        },
+        "monthlyUSDBudget": {
+          "type": "integer"
+        },
+        "alerts": {
+          "type": "object",
+          "properties": {
+            "warn_pct": {
+              "type": "number"
+            },
+            "hard_stop_pct": {
+              "type": "number"
+            }
+          },
+          "required": ["warn_pct", "hard_stop_pct"]
+        }
+      }
+    },
+    "security_and_privacy": {
+      "type": "object",
+      "properties": {
+        "piiDlp": {
+          "type": "object",
+          "properties": {
+            "policy": {
+              "type": "string"
+            },
+            "logRetentionDays": {
+              "type": "integer"
+            }
+          }
+        },
+        "policies": {
+          "type": "object",
+          "properties": {
+            "toolAllowlist": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "operationDenylist": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "quality_and_resilience": {
+      "type": "object",
+      "properties": {
+        "hitl": {
+          "type": "object"
+        },
+        "ragPolicy": {
+          "type": "object"
+        },
+        "qualityMetrics": {
+          "type": "object"
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["pilot", "production", "deprecated", "retired"]
+        },
+        "mandatoryKillSwitch": {
+          "type": "boolean"
+        },
+        "promotionToProductionCriteria": {
+          "type": "object"
+        },
+        "rollbackPlanDefined": {
+          "type": "boolean"
+        }
+      },
+      "required": ["status", "mandatoryKillSwitch"]
+    },
+    "evaluation": {
+      "type": "object"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "temperature_max": {
+            "type": "number"
+          },
+          "top_p_max": {
+            "type": "number"
+          }
+        },
+        "required": ["id", "type"]
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "agent_id",
+    "version",
+    "model",
+    "hcai_purpose",
+    "cognitive_function",
+    "autonomy_level",
+    "responsibility_level",
+    "interaction_mode",
+    "lifecycle"
+  ]
+}

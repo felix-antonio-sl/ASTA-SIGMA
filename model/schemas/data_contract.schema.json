@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Data Contract",
+  "description": "Schema for validating a Data Contract.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "data_contract"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "primaryKey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "type", "required"]
+          }
+        }
+      },
+      "required": ["version", "fields"]
+    },
+    "quality": {
+      "type": "object",
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "rule": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["error", "warn"]
+              }
+            },
+            "required": ["name", "rule", "severity"]
+          }
+        }
+      }
+    },
+    "slo": {
+      "type": "object",
+      "properties": {
+        "freshness_p95": {
+          "type": "string"
+        },
+        "availability_pct": {
+          "type": "number"
+        }
+      },
+      "required": ["freshness_p95", "availability_pct"]
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "string"
+        },
+        "pii": {
+          "type": "boolean"
+        }
+      },
+      "required": ["classification", "pii"]
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "lineage": {
+          "type": "object",
+          "properties": {
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "retention": {
+          "type": "object",
+          "properties": {
+            "duration": {
+              "type": "string"
+            }
+          }
+        },
+        "legalBasisForProcessing": {
+          "type": "string"
+        },
+        "dpiaReference": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "product_name",
+    "version",
+    "interfaces",
+    "schema",
+    "quality",
+    "slo",
+    "security",
+    "governance"
+  ]
+}

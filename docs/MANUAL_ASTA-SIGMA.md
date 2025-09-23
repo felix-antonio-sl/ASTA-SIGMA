@@ -1,8 +1,11 @@
-# Manual de Referencia: Marco ASTA-SIGMA v1.0
+# MANUAL ASTA-SIGMA
 
-Un Producto para Diseñar, Operar y Transformar organizaciones complejas.
+Versión: 2.0
+Propósito: Este documento es el manual de referencia y operaciones unificado para el marco ASTA-SIGMA. Describe la visión, principios, modelo operativo, artefactos y guías prescriptivas para diseñar, operar y transformar la organización.
 
-## Parte 1: Fundamentos y Principios
+---
+
+## Parte 1: Fundamentos y Principios (QUÉ/WHY)
 
 ### 1.1. Visión y Propósito del Marco
 
@@ -26,7 +29,7 @@ ASTA-SIGMA es el marco operativo estándar del GORE Ñuble para la transformaci�
 
 La realidad de la organización se modela con una dualidad:
 
-* Σ (Sigma - Estructura): El diseño, la arquitectura, las políticas. *Lo que planificamos*.
+* Σ (Sigma - Estructura): El diseño, la arquitectura, las políticas. *Lo que planificamos*. (ƒƒ y lo que describimos (as is))
 * Δ (Delta - Dinámica): La operación, las métricas, los eventos. *Lo que medimos y controlamos*.
 
 | Grupo | Entidad Σ (Estructura) | Entidad Δ (Dinámica) |
@@ -71,68 +74,71 @@ Los 3 Espectros:
 
 Regla de Oro: Para cualquier proceso con riesgo, el modo por defecto es Humano-en-el-Bucle (HITL).
 
-## Parte 2: El Ritmo Operativo Continuo
+---
 
-### 2.1. Visión General del Flujo de Valor
+## Parte 2: Modelo Operativo (CUÁNDO)
+
+### 2.1. El Ritmo de Doble Bucle: PDCA (Táctico) + RVC (Estratégico)
 
 La transformación no se gestiona como un proyecto con inicio y fin, sino como un flujo de valor continuo operado por equipos estables. Este flujo tiene un ritmo (`cadencia`) marcado por dos bucles:
 
-1. Bucle Interno (PDCA - Semanal/Quincenal): El equipo de flujo de valor opera en ciclos cortos (sprints, kanban) para planificar, hacer, verificar y actuar sobre pequeñas mejoras de forma constante.
-2. Bucle Externo (Gobernanza - Trimestral): A final de cada `cadencia`, el equipo participa en una Revisión de Valor y Capacidad (RVC), donde se reporta el valor generado y se toman decisiones de inversión para el siguiente ciclo.
+1. Bucle Interno (PDCA - Táctico - Semanas/Quincenal): El equipo de flujo de valor opera en ciclos cortos (sprints, kanban) para planificar, hacer, verificar y actuar sobre pequeñas mejoras de forma constante. Aquí es donde se aplica la agilidad para la entrega incremental y el equipo tiene autonomía sobre el "cómo" implementa las funcionalidades.
+2. Bucle Externo (RVC - Estratégico - Trimestral): A final de cada `cadencia`, el equipo participa en una Revisión de Valor y Capacidad (RVC). Esta es la ceremonia formal de gobernanza donde el equipo rinde cuentas sobre el "qué" valor ha generado y la gobernanza decide sobre la inversión futura.
 
-Las siguientes secciones no son fases secuenciales de un proyecto, sino actividades continuas y paralelas que un equipo maduro realiza constantemente.
+### 2.2. Bucle Interno: Flujo de Trabajo del Equipo
 
-### 2.2. Actividad Continua: Enmarcar y Priorizar
+1. Planificación del Sprint: El equipo planifica su trabajo. Si una historia de usuario implica un cambio en una interfaz, la actualización del `Contrato` es una tarea obligatoria en el sprint.
+2. Diseño Emergente con ADRs: Para decisiones de arquitectura no triviales (ej. "adoptar Kafka para la comunicación asíncrona"), el equipo debe documentar la decisión en un `ADR (Architecture Decision Record)` usando la plantilla.
+3. Desarrollo Guiado por Contratos: El desarrollador implementa el código.
+4. Validación en el Pipeline (CI/CD): Este es el corazón de la "Gobernanza como Código". El pipeline de CI/CD debe incluir "gates" automatizados que:
+   * Validación de Esquemas: Verifican que todos los artefactos (`Contratos`, `Políticas`) se adhieren a su JSON Schema canónico.
+   * Pruebas de Contrato de Servicio: Ejecutan pruebas (ej. con Dredd/Prism) que validan que la implementación de una API cumple con su especificación OpenAPI, como se define en el `Contrato de Servicio`.
+   * Análisis de Políticas: Escanean el código y los artefactos en busca de violaciones a las `Políticas Computables`.
+   * Pruebas de Seguridad y Calidad de IA: Ejecutan las suites de pruebas definidas en las políticas correspondientes.
+   * Análisis de Accesibilidad: Ejecutan herramientas automáticas (ej. Axe) contra las interfaces de usuario.
+   * Un build roto por un gate de gobernanza detiene el despliegue.
+5. Monitoreo y Operación: El equipo utiliza las `Guías Operativas` para la gestión diaria del ST en producción.
 
-* Objetivo: Mantener un backlog priorizado de "fricciones" a resolver y oportunidades a explorar.
-* Actividades Clave:
-  * Monitoreo constante de KPIs y feedback de usuarios para detectar problemas.
-  * Alineación de nuevas ideas con los Pilares de Valor Estratégico.
-  * Análisis de viabilidad tripartito rápido para ideas prometedoras.
-* Entregables:
-  * Backlog priorizado.
-  * `Ficha de Sistema de Trabajo (ST)` actualizada para cada iniciativa significativa.
+### 2.3. Bucle Externo: La Ceremonia de Revisión de Valor y Capacidad (RVC)
 
-### 2.3. Actividad Continua: Diseñar la Solución
+Esta es la ceremonia de gobernanza más importante del marco.
 
-* Objetivo: Mantener una arquitectura limpia y evolutiva.
-* Actividades Clave:
-  * Diseño emergente de soluciones a través de modelado ligero (C4, BPMN).
-  * Creación y actualización de Contratos Computables y ADRs.
-* Entregables:
-  * Artefactos de diseño versionados en Git.
+* Propósito: Sincronizar la estrategia con la ejecución, tomando decisiones de inversión basadas en evidencia.
+* Cadencia: Trimestral.
+* Participantes:
+  * Presentadores: El Equipo de Flujo de Valor (PO, Tech Lead).
+  * Audiencia / Decisores: Gobernanza (Arquitectura, FinOps, Seguridad, Líderes de Portafolio).
+* Flujo de la Ceremonia (Agenda Tipo - 2h):
+  1. Preparación (Asíncrona): El equipo completa la `plantilla_informe_portafolio.md`, recopilando métricas de:
+     * Valor de Negocio: KPIs, OKRs.
+     * Salud del Sistema: Cumplimiento de SLOs, deuda técnica.
+     * Cumplimiento de Gobernanza: Violaciones de políticas, estado de los contratos.
+  2. Presentación de Evidencia (45 min): El equipo presenta sus resultados del trimestre. El foco es en los datos y el aprendizaje.
+  3. Diálogo y Análisis (45 min): La gobernanza hace preguntas para entender el contexto detrás de los números.
+  4. Decisión de Inversión (30 min): La gobernanza delibera y comunica una de las cuatro decisiones para el ST para el próximo trimestre:
+     * 🚀 Continuar/Pivotar: Mantener la inversión actual, ajustando el backlog según el aprendizaje.
+     * 💰 Expandir: Aumentar la inversión debido a un alto retorno y oportunidad.
+     * 📉 Reducir: Disminuir la inversión, poniendo el ST en modo de mantenimiento.
+     * 🛑 Cerrar: Descontinuar el ST y reasignar al equipo a un flujo de valor de mayor impacto.
 
-### 2.4. Actividad Continua: Realizar y Construir
+---
 
-* Objetivo: Entregar incrementos de valor funcionales de forma frecuente y fiable.
-* Actividades Clave:
-  * Desarrollo de código, pipelines, infraestructura y pruebas automatizadas.
-  * Integración continua con validación de contratos.
-* Entregables:
-  * Software desplegable.
+## Parte 3: Kit de Herramientas (CON QUÉ)
 
-### 2.5. Actividad Continua: Operar, Medir y Aprender
+Esta sección contiene el catálogo completo de artefactos operativos del marco ASTA-SIGMA.
 
-* Objetivo: Garantizar la estabilidad del servicio y capturar datos sobre su rendimiento y uso.
-* Actividades Clave:
-  * Despliegue continuo y monitoreo de la salud del servicio (dashboards de SLOs).
-  * Recolección de logs, trazas y métricas.
-* Entregables:
-  * Servicios operando en producción.
-  * Datos de observabilidad.
+### 3.1. Mapeo de Artefactos a Fases
 
-### 2.6. Actividad Continua: Adaptar y Evolucionar
+| Fase Metodológica | Artefactos Clave Utilizados |
+|---|---|
+| Adopción Inicial | `Ficha de ST`, `GM-002`, `Guía de Madurez`, `Contratos Computables` |
+| Bucle Interno (Táctico) | `ADRs`, `GM-003`, `Guías Operativas`, `Contrato de Servicio` |
+| Bucle Externo (Estratégico) | `Revisión de Valor y Capacidad (RVC)`, `Ficha de Iniciativa` |
+| Planificación Estratégica | `Ficha de Portafolio`, Plantillas de [presentacion](../model/presentacion) |
 
-* Objetivo: Usar los datos y el aprendizaje para informar el siguiente ciclo de mejora.
-* Actividades Clave:
-  * Análisis de métricas y feedback en retrospectivas.
-  * Repriorización del backlog.
-* Entregables:
-  * Decisiones informadas para el siguiente ciclo PDCA.
+### 3.2. Artefacto 1: Ficha de Sistema de Trabajo (ST)
 
-## Parte 3: El Kit de Herramientas (Artefactos Operativos) — Versión 1 optimizada
-
-### 3.1. Artefacto 1: Ficha de Sistema de Trabajo (ST)
+*La Ficha de ST es el documento central que captura el diseño y la dinámica de un Sistema de Trabajo.*
 
 ```markdown
 ### Ficha de Sistema de Trabajo: [Nombre del ST]
@@ -179,9 +185,9 @@ Las siguientes secciones no son fases secuenciales de un proyecto, sino activida
 3. Servicios Expuestos y SLOs
    - `SV-XXX`: [Nombre Servicio 1]
      - SLO de Disponibilidad: 99.5%
-       - Contribución a KPI: *"Asegura que el servicio esté operativo para no impactar negativamente el KPI-XXX de tiempo de ciclo."*
+       - Contribución a KPI: "Asegura que el servicio esté operativo para no impactar negativamente el KPI-XXX de tiempo de ciclo."
      - SLO de Latencia p95: < 500ms
-       - Contribución a KPI: *"Una baja latencia mejora la experiencia del funcionario, contribuyendo al KPI-YYY de adopción de la plataforma."*
+       - Contribución a KPI: "Una baja latencia mejora la experiencia del funcionario, contribuyendo al KPI-YYY de adopción de la plataforma."
 
 4. Proceso Principal (Alto Nivel)
    - *Diagrama Mermaid/PlantUML o descripción de los pasos clave.*
@@ -244,11 +250,11 @@ Las siguientes secciones no son fases secuenciales de un proyecto, sino activida
    - *Evidencia para CGR: [ID de la evidencia, ej. "Informe de Rendición Aprobada"].*
 ```
 
-### 3.2. Artefacto 2: Contratos Computables (YAML)
+### 3.3. Artefacto 2: Contratos Computables (YAML)
 
 *(Plantillas YAML para validar en pipelines de CI/CD). Claves en inglés cuando convenga por compatibilidad, con explicación en español. Se referencian ADRs y Políticas de forma consistente.*
 
-#### 3.2.1. Contrato de Agente (IA)
+#### 3.3.1. Contrato de Agente (IA)
 
 ```yaml
 kind: agent_contract
@@ -334,7 +340,7 @@ tasks:
     top_p_max: 0.9
 ```
 
-#### 3.2.2. Contrato de Datos
+#### 3.3.2. Contrato de Datos
 
 ```yaml
 kind: data_contract
@@ -369,7 +375,7 @@ governance:
   dpiaReference: "DPIA-007"
 ```
 
-#### 3.2.3. Contrato de Proceso
+#### 3.3.3. Contrato de Proceso
 
 ```yaml
 kind: process_contract
@@ -388,7 +394,7 @@ saga:
     - {action: "revert_publication", on: "publish_to_erp"}
 ```
 
-#### 3.2.4. Contrato de Conocimiento (RAG)
+#### 3.3.4. Contrato de Conocimiento (RAG)
 
 ```yaml
 kind: knowledge_contract
@@ -422,7 +428,7 @@ citations:
   fields: ["issuer", "doc_id", "emission_date", "article"]
 ```
 
-#### 3.2.5. Contrato de Suministro
+#### 3.3.5. Contrato de Suministro
 
 ```yaml
 kind: supply_contract
@@ -466,7 +472,7 @@ contingency_tests:
   op_guide_ref: "GO-004"
 ```
 
-#### 3.2.6. Contrato de Colaboración
+#### 3.3.6. Contrato de Colaboración
 
 ```yaml
 kind: collaboration_contract
@@ -501,7 +507,7 @@ responsibilities:
     responsibility: "Promote the adoption of services in its municipalities; contribute data to the Ñuble SDI."
 ```
 
-#### 3.2.7. Contrato de Servicio (API)
+#### 3.3.7. Contrato de Servicio (API)
 
 ```yaml
 kind: service_contract
@@ -537,35 +543,35 @@ contract_tests:
   prism_mock: "mocks/identidad-v2.prism.yaml"
 ```
 
-### 3.3. Artefacto 3: Registros de Decisión de Arquitectura (ADR)
+### 3.4. Artefacto 3: Registros de Decisión de Arquitectura (ADR)
 
 Los ADRs son documentos cortos y versionados que capturan decisiones arquitectónicas importantes. Utilice la siguiente plantilla para crear nuevos ADRs dentro del directorio `arquitectura/`.
 
-* [Plantilla de ADR](./arquitectura/templates/ADR_template.md)
+* [Plantilla de ADR](../model/arquitectura/templates/ADR_template.md)
 * Ejemplos de ADRs Implementados:
 
-  * ADR-003: Estándar de Telemetría y Trazabilidad OTel para IA/RAG (`./arquitectura/ADR-003_Estandar_Telemetria_OTel_IA_RAG.md`)
-  * ADR-004: Política de FinOps y Rate-Limit por Tier (`./arquitectura/ADR-004_Politica_FinOps_y_RateLimit_por_Tier.md`)
-  * ADR-005: Estándar de Linaje y DQ computable (`./arquitectura/ADR-005_Estandar_Linaje_y_DQ_Computable.md`)
-  * ADR-006: DR/Chaos como obligación de Suministro (`./arquitectura/ADR-006_DR_Chaos_Obligatorio_Suministro.md`)
+  * ADR-003: Estándar de Telemetría y Trazabilidad OTel para IA/RAG (`../model/arquitectura/ADR-003_Estandar_Telemetria_OTel_IA_RAG.md`)
+  * ADR-004: Política de FinOps y Rate-Limit por Tier (`../model/arquitectura/ADR-004_Politica_FinOps_y_RateLimit_por_Tier.md`)
+  * ADR-005: Estándar de Linaje y DQ computable (`../model/arquitectura/ADR-005_Estandar_Linaje_y_DQ_Computable.md`)
+  * ADR-006: DR/Chaos como obligación de Suministro (`../model/arquitectura/ADR-006_DR_Chaos_Obligatorio_Suministro.md`)
 
-### 3.4. Artefacto 4: Guías Operativas
+### 3.5. Artefacto 4: Guías Operativas
 
 Runbooks para responder a situaciones específicas. Utilice la plantilla en `guias_operativas/`.
 
-* [Plantilla de Guía Operativa](./guias_operativas/templates/GO_template.md)
+* [Plantilla de Guía Operativa](../model/guias_operativas/templates/GO_template.md)
 
-### 3.5. Artefacto 5: Ficha de Experiencia de Usuario (UX)
+### 3.6. Artefacto 5: Ficha de Experiencia de Usuario (UX)
 
 Enfocado en capturar la perspectiva del usuario (Jobs-to-be-Done, Personas y User Journey).
 
-* [Plantilla de Ficha de UX](./diseno_experiencia/plantilla_ficha_ux.md)
+* [Plantilla de Ficha de UX](../model/diseno_experiencia/plantilla_ficha_ux.md)
 * Ejemplos:
 
-  * GO-002 Monitoreo de Calidad de Agentes de IA (`./guias_operativas/GO-002_Monitoreo_Calidad_Agentes_IA.md`)
-  * GO-003 Manual de Redacción Telegráfica para Prompts (`./guias_operativas/GO-003_Manual_Redaccion_Telegrafica.md`)
+  * GO-002 Monitoreo de Calidad de Agentes de IA (`../model/guias_operativas/GO-002_Monitoreo_Calidad_Agentes_IA.md`)
+  * GO-003 Manual de Redacción Telegráfica para Prompts (`../model/guias_operativas/GO-003_Manual_Redaccion_Telegrafica.md`)
 
-### 3.6. Artefacto 6: Revisión de Valor y Capacidad (RVC)
+### 3.7. Artefacto 6: Revisión de Valor y Capacidad (RVC)
 
 ```markdown
 ### Revisión de Valor y Capacidad: Equipo [Nombre del Equipo]
@@ -607,7 +613,7 @@ Enfocado en capturar la perspectiva del usuario (Jobs-to-be-Done, Personas y Use
    - Riesgos y Dependencias: *Riesgos clave para cumplir los objetivos del próximo cadence.*
 ```
 
-### 3.7. Artefacto 7: Ficha de Iniciativa
+### 3.8. Artefacto 7: Ficha de Iniciativa
 
 ```yaml
 id: INIT-XXX-001
@@ -643,7 +649,7 @@ initiative:
     - "Informe de resultados generado"
 ```
 
-### 3.8. Artefacto 8: Política Computable
+### 3.9. Artefacto 8: Política Computable
 
 ```yaml
 id: POL-XXX
@@ -668,150 +674,76 @@ policy:
       approver: "Rol Aprobador (ej. CISO, DPO, Subcomité de IA)"
 ```
 
-## Parte 4: Planificación y Gestión Estratégica de la Transformación
+---
 
-### 4.1. Artefacto 9: Plan Maestro de Transformación Digital
+## Parte 4: Gobernanza Continua y Modelo de Inversión (BAJO QUÉ REGLAS)
 
-Documento fundacional que articula visión, pilares, hoja de ruta plurianual y gobernanza.
-
-* [Plantilla de Plan Maestro](./presentacion/templates/plantilla_plan_maestro_transformacion.md)
-
-### 4.2. Artefacto 10: Ficha de Portafolio de Transformación
-
-Representación computable del Plan Maestro (pilares, KPIs organizacionales, inventario de ST e Iniciativas).
-
-* [Plantilla de Ficha de Portafolio](./portfolio/plantilla_ficha_portafolio.yaml)
-
-### 4.3. Informe de Avance de la Transformación Digital
-
-Informe ejecutivo principal: progreso vs. KPIs, salud de activos digitales (ST), estado de iniciativas y foco de inversión.
-
-* [Plantilla de Informe de Portafolio](./presentacion/templates/plantilla_informe_portafolio.md)
-
-## Parte 5: Gobernanza Continua y Modelo de Inversión
-
-### 5.1. Cadencia de Gobernanza y Bucles de Control
+### 4.1. Cadencia de Gobernanza y Bucles de Control
 
 La gobernanza es un diálogo de inversión rítmico. La RVC revisa la efectividad de bucles tácticos y escala decisiones estratégicas cuando no se cumplen SLOs.
 
-### 5.2. Decisiones de Inversión
+### 4.2. Decisiones de Inversión
 
 1. Continuar
 2. Expandir
 3. Reducir
 4. Cerrar
 
-### 5.3. Gobernanza de Datos y Conocimiento
+### 4.3. Gobernanza de Datos y Conocimiento
 
 Curación formal de fuentes para RAG: autoridad, vigencia y trazabilidad. Respuestas sin cita = fallo grave.
 
-### 5.4. Gobernanza Proporcional al Riesgo (Risk Tiers)
+### 4.4. Gobernanza Proporcional al Riesgo (Risk Tiers)
 
 * R1 (Bajo): Sistemas internos sin datos sensibles; bajo impacto.
 * R2 (Medio): Datos personales no sensibles; importancia operativa.
 * R3 (Alto): Datos sensibles/impacto legal o financiero; alto impacto público.
 
-Implementación vía Políticas Computables:
+Implementación vía Políticas Computables: `politica_slo_por_riesgo.yaml`, `politica_temperatura_llm.yaml`, etc.
 
-* `politica_slo_por_riesgo.yaml`
-* `politica_temperatura_llm.yaml`
-* `POL-FINOPS-IA.yaml` (ADR-004)
-* `POL-TRAZA-IA.yaml` (ADR-003)
-* `POL-ABUSO-LLM.yaml`
+### 4.5. Seguridad y Cumplimiento por Diseño
 
-### 5.5. Seguridad y Cumplimiento por Diseño
+Zero-Trust; acceso por ABAC/RBAC; auditoría en log inmutable.
 
-Zero‑Trust; acceso por ABAC/RBAC; auditoría en log inmutable.
-
-### 5.6. Observabilidad y SRE Sociotécnico
+### 4.6. Observabilidad y SRE Sociotécnico
 
 Logs, métricas, trazas; SLOs con presupuestos de error que habilitan innovación responsable.
 
-### 5.7. Gestión de la Cadena de Suministro Digital
+### 4.7. Gestión de la Cadena de Suministro Digital
 
 Dependencias explícitas; contratos de suministro; monitoreo de salud para evitar fallos en cascada.
 
-### 5.8. FinOps: Gestión de Costos y Valor
+### 4.8. FinOps: Gestión de Costos y Valor
 
-Etiquetado de costos de nube y tokens de IA por ST y capacidad de negocio para análisis costo‑valor.
+Etiquetado de costos de nube y tokens de IA por ST y capacidad de negocio para análisis costo-valor.
 
-## Parte 6: Anexos
+---
 
-### 6.1. Glosario (extracto)
+## Parte 5: Recetas de Aplicación (CÓMO)
 
-* ADR (Registro de Decisión de Arquitectura): Documento corto y versionado que captura una decisión arquitectónica importante, su contexto y sus consecuencias.
-* Agente Digital: Componente de software, a menudo dotado de IA, que realiza tareas de forma autónoma o colaborativa dentro de un Sistema de Trabajo.
-* ASTA-SIGMA: Nombre del marco de trabajo integrado que fusiona los principios de Arquitectura Sociotécnica Adaptativa (ASTA) y la gobernanza computable (SIGMA).
-* Bucle de Control: Mecanismo cibernético que usa un sensor (SLI) para medir el estado de un sistema, lo compara con un objetivo (SLO) y aplica una acción (actuador/guía operativa) para mantener la estabilidad.
-* Cadencia (Cadence): Ritmo o frecuencia regular con la que se realizan ciertas actividades, como los bucles de gobernanza (ej. trimestral).
-* CI/CD (Integración Continua / Despliegue Continuo): Prácticas de DevOps para automatizar la construcción, prueba y despliegue de software.
-* Contrato Computable: Acuerdo formal y versionado (generalmente en formato YAML/JSON) que define las interacciones, expectativas y garantías entre componentes de un sistema. Es la base de la "Gobernanza como Código".
-* EA-Ligera (EA-Lite): Filosofía de Arquitectura Empresarial que se enfoca en modelar lo mínimo necesario para entregar valor y gestionar el riesgo.
-* FinOps: Disciplina que combina prácticas financieras con la ingeniería de la nube para gestionar y optimizar los costos.
-* Gobernanza como Código: Práctica de definir y gestionar políticas y controles como código versionable y auditable.
-* HCAI (IA Centrada en el Humano): Enfoque de diseño que prioriza las capacidades, necesidades y el control humano en el desarrollo de sistemas de IA.
-* HITL (Humano-en-el-Bucle): Patrón de diseño donde un proceso autónomo de IA se detiene en puntos críticos para solicitar validación o decisión a un humano.
-* KPI/OKR (Indicadores Clave de Rendimiento / Objetivos y Resultados Clave): Marcos para definir y medir el éxito estratégico y operativo.
-* #NoProyectos (#NoProjects): Filosofía de gestión que organiza el trabajo en flujos de valor continuos operados por equipos estables, en lugar de proyectos con un inicio y fin definidos.
-* PDCA (Planificar-Hacer-Verificar-Actuar): Ciclo iterativo de gestión para la mejora continua.
-* RAG (Generación Aumentada por Recuperación): Patrón de IA donde un modelo de lenguaje basa sus respuestas en información recuperada de una base de conocimiento externa.
-* ReAct (Razonar y Actuar): Patrón de agente de IA que combina el razonamiento con la capacidad de usar herramientas para recabar información e iterar hasta resolver un problema.
-* RVC (Revisión de Valor y Capacidad): Ceremonia de gobernanza trimestral donde un equipo reporta el valor generado y justifica la inversión para el siguiente ciclo.
-* SDA (Sentir-Decidir-Actuar): Ciclo cognitivo que describe cómo un agente (humano o IA) percibe información, toma una decisión y ejecuta una acción.
-* Σ (Sigma): Símbolo que representa la Estructura de un sistema: su diseño y componentes estáticos.
-* Δ (Delta): Símbolo que representa la Dinámica de un sistema: su operación y comportamiento en el tiempo.
-* SLI (Indicador de Nivel de Servicio): Métrica específica que mide un aspecto del rendimiento de un servicio (ej. latencia).
-* SLO (Objetivo de Nivel de Servicio): Meta numérica para un SLI (ej. 99.9% de disponibilidad).
-* SRE (Ingeniería de Fiabilidad de Sitios): Disciplina de ingeniería para crear sistemas escalables y altamente fiables.
-* ST (Sistema de Trabajo): Unidad de análisis que comprende personas, procesos y tecnología interactuando para cumplir un propósito.
-* Zero-Trust (Confianza Cero): Modelo de seguridad que verifica cada solicitud como si se originara de una red no controlada.
-
-### 6.2. Checklist de Adopción Rápida para Nuevas Iniciativas
-
-1. [ ] `Ficha de ST` v0.1 creada.
-2. [ ] Contratos (Datos, Agente, Proceso) v1.0 en Git.
-3. [ ] 3 Espectros definidos por Agente Digital (propósito, autonomía, responsabilidad).
-4. [ ] SLOs definidos por servicio.
-5. [ ] Políticas y riesgos principales identificados.
-6. [ ] Punto HITL definido si hay riesgo.
-7. [ ] Dependencias externas y `Contratos de Suministro` definidos.
-8. [ ] Instrumentación de logs, métricas y trazas planificada.
-
-## Parte 7: Guías Prácticas de Aplicación
-
-### 7.1. Iniciar una Nueva Iniciativa Digital
-
-Objetivo: Llevar una idea a un MVP gobernado con ASTA‑SIGMA.
+### 5.1. Receta A: Iniciar una Nueva Iniciativa Digital
 
 * Paso 1: Enmarcar con `Ficha de ST` v0.1 (propósito, actores, fricciones, KPIs).
 * Paso 2: Diseñar arquitectura mínima con `Contratos` y `ADRs`.
 * Paso 3: Construir primer incremento validando contratos en CI/CD.
 * Paso 4: Operar y medir (SLIs/SLOs y presupuesto de error).
 
-Resultado: Capacidad digital alineada a estrategia con gobernanza desde el día 1.
+### 5.2. Receta B: Modernizar un Sistema/Proceso Legacy
 
-### 7.2. Modernizar un Sistema/Proceso Legacy
-
-* Paso 1: Arquitectura inversa con `Ficha de ST` (AS‑IS).
-* Paso 2: Documentar contratos implícitos (AS‑IS).
-* Paso 3: Diseñar TO‑BE (SLOs, salvaguardas, bucles de control).
+* Paso 1: Arquitectura inversa con `Ficha de ST` (AS-IS).
+* Paso 2: Documentar contratos implícitos (AS-IS).
+* Paso 3: Diseñar TO-BE (SLOs, salvaguardas, bucles de control).
 * Paso 4: Backlog incremental de modernización.
 
-Resultado: Plan de modernización basado en cerrar brechas de capacidad y riesgo.
-
-### 7.3. Diseñar un Proceso Inter‑Divisional
+### 5.3. Receta C: Diseñar un Proceso Inter-Divisional
 
 * Modelar cada participante como ST.
 * Definir interacciones como servicios y contratos.
-* Orquestar el flujo end‑to‑end con BPMN invocando servicios (no lógica de negocio).
+* Orquestar el flujo end-to-end con BPMN invocando servicios (no lógica de negocio).
 
-Resultado: Proceso desacoplado, resiliente y gobernable.
-
-### 7.4. Elaborar Términos de Referencia (TDR) y Evaluar Soluciones
+### 5.4. Receta D: Elaborar Términos de Referencia (TDR) y Evaluar Soluciones
 
 * `Ficha de ST` para contexto y propósito.
 * `Contratos` como requisitos técnicos/no funcionales (SLOs explícitos).
 * `ADRs` como restricciones no negociables (ej.: OIDC).
-* Criterios de aceptación: compatibilidad con ASTA‑SIGMA, cumplimiento de contratos y generación de evidencia operativa.
-
-Resultado: Dossier de arquitectura ejecutable con evaluación objetiva de ofertas.
+* Criterios de aceptación: compatibilidad con ASTA-SIGMA, cumplimiento de contratos y generación de evidencia operativa.

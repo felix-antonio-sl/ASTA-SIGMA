@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Process Contract",
+  "description": "Schema for validating a Process Contract.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "process_contract"
+    },
+    "process_name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "sla": {
+      "type": "object",
+      "properties": {
+        "cycle_time_p95": {
+          "type": "string",
+          "description": "ISO 8601 duration format."
+        },
+        "stp_target_pct": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": ["cycle_time_p95", "stp_target_pct"]
+    },
+    "hitl": {
+      "type": "object",
+      "properties": {
+        "queues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "saga": {
+      "type": "object",
+      "properties": {
+        "compensations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "on": {
+                "type": "string"
+              }
+            },
+            "required": ["action", "on"]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "process_name",
+    "version",
+    "sla"
+  ]
+}

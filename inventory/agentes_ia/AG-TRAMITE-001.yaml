@@ -4,22 +4,22 @@ agent_id: "AG-TRAMITE-001"
 hcai_purpose: "ASSIST"
 interaction_mode: "HUMAN_IN_THE_LOOP"
 legal:
-  proposito_legal: "Apoyo a instrucción de expediente"
-  tratamiento_datos_personales: "si"
-  base_legal_datos: "Ley 19.880; Ley 19.628"
+  legal_purpose: "Apoyo a instrucción de expediente" # Trad: proposito_legal
+  personal_data_processing: "si" # Trad: tratamiento_datos_personales
+  legal_basis_for_data: "Ley 19.880; Ley 19.628" # Trad: base_legal_datos
 tde:
-  autenticacion: "ClaveUnica"
-  interoperabilidad: "PISEE"
-  notificacion: "Notificador/DDU"
+  authentication: "ClaveUnica" # Trad: autenticacion
+  interoperability: "PISEE" # Trad: interoperabilidad
+  notification: "Notificador/DDU" # Trad: notificacion
 dp_21719:
-  privacidad_por_diseno: true
-  medidas_seguridad: ["cifrado","dlp","verificacion_regular"]
-  eipd_id: "no_aplica"
-  brechas_go: "GO-007_Notificacion_Brechas_Datos"
-ia_riesgo:
-  nivel: "LIMITADO"
-  transparencia_usuario: true
-  monitoreo_pos_despliegue: true
+  privacy_by_design: true # Trad: privacidad_por_diseno
+  security_measures: ["cifrado","dlp","verificacion_regular"] # Trad: medidas_seguridad
+  dpia_id: "no_aplica" # Trad: eipd_id
+  data_breach_policy_ref: "GO-007_Notificacion_Brechas_Datos" # Trad: brechas_go
+ai_risk:
+  level: "LIMITADO" # Trad: nivel
+  user_transparency: true # Trad: transparencia_usuario
+  post_deployment_monitoring: true # Trad: monitoreo_pos_despliegue
   kill_switch: true
 telemetry:
   opentelemetry: true

@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Service Contract",
+  "description": "Schema for validating a Service (API) Contract.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "service_contract"
+    },
+    "service_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "openapi_ref": {
+      "type": "string",
+      "description": "Relative path to the OpenAPI specification file."
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["development", "testing", "production", "deprecated"]
+    },
+    "slo": {
+      "type": "object",
+      "properties": {
+        "availability_pct": {
+          "type": "number"
+        },
+        "latency_p95_ms": {
+          "type": "integer"
+        },
+        "error_rate_pct_max": {
+          "type": "number"
+        }
+      },
+      "required": ["availability_pct", "latency_p95_ms", "error_rate_pct_max"]
+    },
+    "error_budget": {
+      "type": "object",
+      "properties": {
+        "window_days": {
+          "type": "integer"
+        },
+        "actions_on_breach": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "authn": {
+          "type": "string"
+        },
+        "authz": {
+          "type": "string"
+        },
+        "audit_log": {
+          "type": "string"
+        }
+      },
+      "required": ["authn", "authz"]
+    },
+    "ratelimits": {
+      "type": "object",
+      "properties": {
+        "rps": {
+          "type": "integer"
+        },
+        "burst": {
+          "type": "integer"
+        }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "properties": {
+        "sbom_required": {
+          "type": "boolean"
+        },
+        "slsa_min_level": {
+          "type": "string"
+        }
+      }
+    },
+    "contract_tests": {
+      "type": "object",
+      "properties": {
+        "dredd": {
+          "type": "string"
+        },
+        "prism_mock": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "service_id",
+    "version",
+    "openapi_ref",
+    "lifecycle",
+    "slo"
+  ]
+}

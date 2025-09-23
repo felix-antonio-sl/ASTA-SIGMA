@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Collaboration Contract",
+  "description": "Schema for validating a Collaboration Contract between organizations.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "collaboration_contract"
+    },
+    "agreement_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": ["entity", "role"]
+      }
+    },
+    "common_objective": {
+      "type": "string"
+    },
+    "governance_agreements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "shared_services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "service_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "agreed_sla": {
+            "type": "string"
+          }
+        },
+        "required": ["service_id", "name", "provider"]
+      }
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string"
+          },
+          "responsibility": {
+            "type": "string"
+          }
+        },
+        "required": ["entity", "responsibility"]
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "agreement_id",
+    "version",
+    "participants",
+    "common_objective"
+  ]
+}

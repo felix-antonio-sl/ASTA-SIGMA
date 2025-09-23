@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASTA-SIGMA Knowledge Contract",
+  "description": "Schema for validating a Knowledge (RAG) Contract.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "knowledge_contract"
+    },
+    "collection_name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "source_authority_list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issuer": {
+            "type": "string"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["issuer", "types"]
+      }
+    },
+    "blocked_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expiry_policy": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "string",
+          "description": "ISO 8601 duration format."
+        },
+        "override_by_type": {
+          "type": "object"
+        }
+      },
+      "required": ["default"]
+    },
+    "retention": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "ISO 8601 duration format."
+        }
+      },
+      "required": ["duration"]
+    },
+    "indexing": {
+      "type": "object",
+      "properties": {
+        "min_metadata": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mandatory_filters": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": ["min_metadata"]
+    },
+    "citations": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "enum": ["required_exact", "required_summary", "optional"]
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["style", "fields"]
+    }
+  },
+  "required": [
+    "kind",
+    "collection_name",
+    "version",
+    "source_authority_list",
+    "expiry_policy",
+    "retention",
+    "indexing",
+    "citations"
+  ]
+}
